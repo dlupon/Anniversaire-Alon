@@ -4,23 +4,17 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     // -------~~~~~~~~~~================# // Components
-    [SerializeField] GameObject _room;
-    [SerializeField] Camera _camera;
-
-    // -------~~~~~~~~~~================# // Anomalies
-    private List<Anomaly> anomalies = new List<Anomaly>();
+    [SerializeField] private GameObject _room;
+    [SerializeField] private Camera _camera;
+    [SerializeField] private AnomalyHandeler _anomalyHandeler;
+    public AnomalyHandeler AnomalyHandeler => _anomalyHandeler;
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
     private void Start()
     {
-        transform.GetComponentsInChildren(anomalies);
-        anomalies.Sort(new AnomalyShuffleComparer());
-
         Hide();
 
         EventBus.RoomInit?.Invoke(this);
-
-        Debug.Log(name);
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Visibility

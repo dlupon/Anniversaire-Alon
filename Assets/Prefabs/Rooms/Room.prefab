@@ -172,6 +172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3596449255843944160}
   - component: {fileID: 1671464056252504207}
+  - component: {fileID: 6439194949228640649}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -209,3 +210,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _room: {fileID: 3946885396029307914}
   _camera: {fileID: 7964200042318638197}
+  _anomalyHandeler: {fileID: 6439194949228640649}
+--- !u!114 &6439194949228640649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3946885396029307914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450a1a53f6e7ee3448b0f1fcf5ccd854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

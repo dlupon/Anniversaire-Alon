@@ -23,19 +23,24 @@ public class RoomManager : MonoBehaviour
         StartCoroutine(InitRooms());
     }
 
+    private void OnDestroy()
+    {
+        EventBus.RoomInit -= _rooms.Add;
+        EventBus.NeedChangeRoom -= ShowRoomIndexOffset;
+    }
+
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Room
     private IEnumerator InitRooms()
     {
-        Func<bool> lIsRoomsAreAllInitialized = () => transform.childCount <= _rooms.Count;
-
-        yield return new WaitUntil(lIsRoomsAreAllInitialized);
-
+        yield return new WaitUntil(() => transform.childCount <= _rooms.Count);
 
         _rooms.Sort((Room pA, Room pB) => pA.transform.GetSiblingIndex().CompareTo(pB.transform.GetSiblingIndex()));
         EventBus.RoomListInit?.Invoke(_rooms);
 
         Do(HideRoom);
         ShowRoom(0);
+
+        EventBus.Start?.Invoke();
     }
 
     private void Do(Action<Room> pMethod)
