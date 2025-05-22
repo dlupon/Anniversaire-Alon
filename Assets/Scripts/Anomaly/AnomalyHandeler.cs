@@ -4,43 +4,44 @@ using UnityEngine;
 public class AnomalyHandeler : MonoBehaviour
 {
     // -------~~~~~~~~~~================# // Active
-    public bool IsActive => _current != null;
+    public bool IsActive => _activeAnomalies.Count > 0;
 
     // -------~~~~~~~~~~================# // Anomaly
-    private List<IAnomaly> anomalies = new List<IAnomaly>();
-    private IAnomaly _current;
+    private List<IAnomaly> _anomalies = new List<IAnomaly>();
+    private List<IAnomaly> _activeAnomalies = new List<IAnomaly>();
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
     private void Start()
     {
-        transform.GetComponentsInChildren(anomalies);
-        anomalies.Sort(new RandomComparer());
-        Debug.Log($"{name} -> {anomalies.Count}");
+        transform.GetComponentsInChildren(_anomalies);
+        _anomalies.Sort(new RandomComparer());
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Behaviour
     public IAnomaly Trigger()
     {
-        if (anomalies.Count <= 0) return null;
+        if (_anomalies.Count <= 0) return null;
 
-        _current = anomalies[0];
-        anomalies.Remove(_current);
-        anomalies.Add(_current);
+        IAnomaly lCurrent = _anomalies[0];
+        _anomalies.Remove(lCurrent);
+        _activeAnomalies.Add(lCurrent);
 
-        _current.Trigger();
+        lCurrent.Trigger();
 
-        return _current;
+        return lCurrent;
     }
 
-    public IAnomaly Fix()
+    public bool Fix(IAnomaly pAnomaly)
     {
-        if (_current  == null) return null;
+        if (pAnomaly == null || !_activeAnomalies.Contains(pAnomaly)) return false;
 
-        IAnomaly lFixedAnomaly = _current;
-        lFixedAnomaly.Fix();
+        pAnomaly.Fix();
 
-        _current = null;
+        _activeAnomalies.Remove(pAnomaly);
+        _anomalies.Add(pAnomaly);
 
-        return lFixedAnomaly;
+        return true;
     }
 }
+
+public enum Anomaly { Movement, Floating, Picture, Intruder, Other }

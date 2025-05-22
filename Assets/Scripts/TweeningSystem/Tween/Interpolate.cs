@@ -19,12 +19,15 @@ namespace UnBocal.TweeningSystem
         {
             Action<float> lInterpolationMethod = null;
 
-            switch (pSetter)
+            if (pStartValue != pEndValue)
             {
-                case Action<int> lInt: lInterpolationMethod = (float pRatio) => lInt((int)Mathf.LerpUnclamped((int)pStartValue, (int)pEndValue, pEasing(pRatio))); break;
-                case Action<float> lFloat: lInterpolationMethod = (float pRatio) => lFloat(Mathf.LerpUnclamped((float)pStartValue, (float)pEndValue, pEasing(pRatio))); break;
-                case Action<Color> lColor: lInterpolationMethod = (float pRatio) => lColor(UnityEngine.Color.LerpUnclamped((Color)pStartValue, (Color)pEndValue, pEasing(pRatio))); break;
-                default: return Error.InterpolationNotSupported(pStartValue, typeof(Type).Name);
+                switch (pSetter)
+                {
+                    case Action<int> lInt: lInterpolationMethod = (float pRatio) => lInt((int)Mathf.LerpUnclamped((int)pStartValue, (int)pEndValue, pEasing(pRatio))); break;
+                    case Action<float> lFloat: lInterpolationMethod = (float pRatio) => lFloat(Mathf.LerpUnclamped((float)pStartValue, (float)pEndValue, pEasing(pRatio))); break;
+                    case Action<Color> lColor: lInterpolationMethod = (float pRatio) => lColor(UnityEngine.Color.LerpUnclamped((Color)pStartValue, (Color)pEndValue, pEasing(pRatio))); break;
+                    default: return Error.InterpolationNotSupported(pStartValue, typeof(Type).Name);
+                }
             }
 
             return AddInterpolation(pContainer, typeof(Type).Name, lInterpolationMethod, pDuration, pDelay);

@@ -26,13 +26,15 @@ namespace UnBocal.TweeningSystem
 
         private Interpolation Position(Transform pTransform, Vector3 pStartPosition, Vector3 pEndPosition, float pDuration, Func<float, float> pEasing, float pDelay, Ref pRef)
         {
-            if (pStartPosition == pEndPosition) return null;
-
             Action<float> lInterpolationMethod = null;
-            switch (pRef)
+
+            if (pStartPosition == pEndPosition)
             {
-                case Ref.Global: lInterpolationMethod = (float pRatio) => pTransform.position = Vector3.LerpUnclamped(pStartPosition, pEndPosition, pEasing(pRatio)); break;
-                case Ref.Local: lInterpolationMethod = (float pRatio) => pTransform.localPosition = Vector3.LerpUnclamped(pStartPosition, pEndPosition, pEasing(pRatio)); break; ;
+                switch (pRef)
+                {
+                    case Ref.Global: lInterpolationMethod = (float pRatio) => pTransform.position = Vector3.LerpUnclamped(pStartPosition, pEndPosition, pEasing(pRatio)); break;
+                    case Ref.Local: lInterpolationMethod = (float pRatio) => pTransform.localPosition = Vector3.LerpUnclamped(pStartPosition, pEndPosition, pEasing(pRatio)); break; ;
+                }
             }
 
             return AddInterpolation(pTransform, nameof(pTransform.position), lInterpolationMethod, pDuration, pDelay);

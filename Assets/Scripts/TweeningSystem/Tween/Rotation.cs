@@ -26,15 +26,16 @@ namespace UnBocal.TweeningSystem
 
         private Interpolation Rotation(Transform pTransform, Quaternion pStartRotation, Quaternion pEndRotation, float pDuration, Func<float, float> pEasing, float pDelay, Ref pRef)
         {
-            if (pStartRotation == pEndRotation) return null;
-
             Action<float> lInterpolationMethod = null;
 
-            switch (pRef)
+            if (pStartRotation != pEndRotation)
             {
-                case Ref.Global: lInterpolationMethod = (float pRatio) => pTransform.rotation = Quaternion.LerpUnclamped(pStartRotation, pEndRotation, pEasing(pRatio)); break;
+                switch (pRef)
+                {
+                    case Ref.Global: lInterpolationMethod = (float pRatio) => pTransform.rotation = Quaternion.LerpUnclamped(pStartRotation, pEndRotation, pEasing(pRatio)); break;
 
-                case Ref.Local: lInterpolationMethod = (float pRatio) => pTransform.rotation = Quaternion.LerpUnclamped(pStartRotation, pEndRotation, pEasing(pRatio)); break;
+                    case Ref.Local: lInterpolationMethod = (float pRatio) => pTransform.rotation = Quaternion.LerpUnclamped(pStartRotation, pEndRotation, pEasing(pRatio)); break;
+                }
             }
 
             return AddInterpolation(pTransform, nameof(pTransform.rotation), lInterpolationMethod, pDuration, pDelay);

@@ -3,15 +3,21 @@ using System.Collections.Generic;
 
 public static class EventBus
 {
+    // -------~~~~~~~~~~================# // Initialization
     public static Action<Room> RoomInit;
     public static Action<List<Room>> RoomListInit;
 
+    // -------~~~~~~~~~~================# // Game
     public static Action Start;
 
+    // -------~~~~~~~~~~================# // Room
     public static Action<int> NeedChangeRoom;
     public static Action NeedCameraFade;
     public static Action CameraFadeMid;
     public static Action<Room> RoomChanged;
+
+    // -------~~~~~~~~~~================# // Anomalies
+    public static Action Report;
 
 }
 

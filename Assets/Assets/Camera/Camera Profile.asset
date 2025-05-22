@@ -1,33 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8314274845442145493
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 556797029e73b2347956b6579e77e05b, type: 3}
-  m_Name: DepthOfField
-  m_EditorClassIdentifier: 
-  active: 1
-  enabled:
-    overrideState: 1
-    value: 1
-  focusDistance:
-    overrideState: 1
-    value: 8.13
-  aperture:
-    overrideState: 1
-    value: 6.97
-  focalLength:
-    overrideState: 1
-    value: 165.29
-  kernelSize:
-    overrideState: 0
-    value: 1
 --- !u!114 &-5807953744409010976
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -49,9 +21,9 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.5
+    value: 0.57
   color:
-    overrideState: 0
+    overrideState: 1
     value: {r: 0, g: 0, b: 0, a: 1}
   ambientOnly:
     overrideState: 0
@@ -70,16 +42,16 @@ MonoBehaviour:
     value: 10
   zBias:
     overrideState: 0
-    value: 0.000281
+    value: 0
   directLightingStrength:
     overrideState: 0
     value: 0
   radius:
-    overrideState: 0
-    value: 0.25
+    overrideState: 1
+    value: 1.9
   quality:
-    overrideState: 0
-    value: 2
+    overrideState: 1
+    value: 0
 --- !u!114 &-5360940616791413134
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -92,7 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b77c5407dc277943b591ade9e6b18c5, type: 3}
   m_Name: LensDistortion
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -176,13 +148,13 @@ MonoBehaviour:
     value: 1
   colored:
     overrideState: 1
-    value: 0
+    value: 1
   intensity:
     overrideState: 1
-    value: 0.31
+    value: 0.522
   size:
     overrideState: 1
-    value: 1.35
+    value: 1.48
   lumContrib:
     overrideState: 1
     value: 1
@@ -203,7 +175,6 @@ MonoBehaviour:
   - {fileID: -2260248930081052604}
   - {fileID: -1076499600668513112}
   - {fileID: -5807953744409010976}
-  - {fileID: -8314274845442145493}
   - {fileID: 3807728188145487766}
   - {fileID: 995386647919613721}
   - {fileID: 5355988201878898647}
@@ -219,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a79b01ea5641d4aa6daa2e23605641, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1

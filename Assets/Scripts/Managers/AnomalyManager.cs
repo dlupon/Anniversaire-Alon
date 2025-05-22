@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AnomalyManager : MonoBehaviour
 {
@@ -64,10 +65,6 @@ public class AnomalyManager : MonoBehaviour
 
         IAnomaly lNewAnomaly = _rooms[lRandomIndex].AnomalyHandeler.Trigger();
 
-        if (lNewAnomaly == null) return;
-
-        _anomalies.Add(lNewAnomaly);
-
-        Debug.Log("ANOMATY TRIGGERED");
+        if (lNewAnomaly != null) _anomalies.Add(lNewAnomaly);
     }
 }

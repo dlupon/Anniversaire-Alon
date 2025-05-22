@@ -63,7 +63,7 @@ namespace UnBocal.TweeningSystem.Interpolations
         public void Complete()
         {
             Update = null;
-            InterpolationMethod(1);
+            InterpolationMethod?.Invoke(1);
             OnFinished?.Invoke();
         }
 
@@ -78,7 +78,7 @@ namespace UnBocal.TweeningSystem.Interpolations
         {
             if (target.IsNull()) Update = null;
             else if (Ratio >= 1) Complete();
-            else InterpolationMethod(Ratio);
+            else InterpolationMethod?.Invoke(Ratio);
         }
 
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Interpolation UnScaled
@@ -92,7 +92,7 @@ namespace UnBocal.TweeningSystem.Interpolations
         {
             if (target.IsNull()) Update = null;
             else if (UnscaleRatio >= 1) Complete();
-            else InterpolationMethod(UnscaleRatio);
+            else InterpolationMethod?.Invoke(UnscaleRatio);
         }
     }
 }

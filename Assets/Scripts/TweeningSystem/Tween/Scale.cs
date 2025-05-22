@@ -35,9 +35,10 @@ namespace UnBocal.TweeningSystem
 
         private Interpolation Scale(Transform pTransform, Vector3 pStartScale, Vector3 pEndScale, float pDuration, Func<float, float> pEasing, float pDelay)
         {
-            if (pStartScale == pEndScale) return null;
+            Action<float> lInterpolationMethod = null;
 
-            Action<float> lInterpolationMethod = (float pRatio) => pTransform.localScale = Vector3.LerpUnclamped(pStartScale, pEndScale, pEasing(pRatio));
+            if (pStartScale != pEndScale)
+            lInterpolationMethod = (float pRatio) => pTransform.localScale = Vector3.LerpUnclamped(pStartScale, pEndScale, pEasing(pRatio));
 
             return AddInterpolation(pTransform, nameof(pTransform.localScale), lInterpolationMethod, pDuration, pDelay);
         }

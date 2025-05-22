@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour, IAnomaly
 {
-    // -------~~~~~~~~~~================# // Active
+    // -------~~~~~~~~~~================# // Anomaly
     public bool IsActive { get; set; } = false;
+    public string Type => $"{Anomaly.Movement}";
 
     // -------~~~~~~~~~~================# // Movement
     [SerializeField] private Transform _target;
