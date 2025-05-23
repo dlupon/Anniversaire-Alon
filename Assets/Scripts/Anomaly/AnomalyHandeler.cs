@@ -1,14 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AnomalyHandeler : MonoBehaviour
 {
     // -------~~~~~~~~~~================# // Active
-    public bool IsActive => _activeAnomalies.Count > 0;
+    public bool IsActive => _activeAnomaly != null;
 
     // -------~~~~~~~~~~================# // Anomaly
     private List<IAnomaly> _anomalies = new List<IAnomaly>();
-    private List<IAnomaly> _activeAnomalies = new List<IAnomaly>();
+    private IAnomaly _activeAnomaly;
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
     private void Start()
@@ -20,28 +21,27 @@ public class AnomalyHandeler : MonoBehaviour
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Behaviour
     public IAnomaly Trigger()
     {
-        if (_anomalies.Count <= 0) return null;
+        if (_anomalies.Count <= 0 || _activeAnomaly != null) return null;
 
-        IAnomaly lCurrent = _anomalies[0];
-        _anomalies.Remove(lCurrent);
-        _activeAnomalies.Add(lCurrent);
+        _activeAnomaly = _anomalies[0];
+        _anomalies.Remove(_activeAnomaly);
 
-        lCurrent.Trigger();
+        _activeAnomaly.Trigger();
 
-        return lCurrent;
+        return _activeAnomaly;
     }
 
-    public bool Fix(IAnomaly pAnomaly)
+    public IAnomaly Fix(string pAnomaly)
     {
-        if (pAnomaly == null || !_activeAnomalies.Contains(pAnomaly)) return false;
+        if (_activeAnomaly == null || _activeAnomaly.Type != pAnomaly) return null;
 
-        pAnomaly.Fix();
+        IAnomaly lFixedAnomaly = _activeAnomaly;
+        lFixedAnomaly.Fix();
+        _anomalies.Add(lFixedAnomaly);
+        _activeAnomaly = null;
 
-        _activeAnomalies.Remove(pAnomaly);
-        _anomalies.Add(pAnomaly);
-
-        return true;
+        return lFixedAnomaly;
     }
 }
 
-public enum Anomaly { Movement, Floating, Picture, Intruder, Other }
+public enum Anomaly { Missing, Extra, Movement, Picture, Other }

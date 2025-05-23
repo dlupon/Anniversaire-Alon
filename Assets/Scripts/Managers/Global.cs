@@ -18,7 +18,15 @@ public static class EventBus
 
     // -------~~~~~~~~~~================# // Anomalies
     public static Action Report;
+    public static Action<string> ReportAnomaly;
+    public static Action CheckAnomalyDone;
+    public static Action AnomalyFixed;
+    public static Action AnomalyNotFounded;
 
+    // -------~~~~~~~~~~================# // Time
+    public static Action<int, int> TimeUpdated;
+    public static Action<int> TimeNewHour;
+    public static Action TimeEnded;
 }
 
 public class RandomComparer : IComparer<object>

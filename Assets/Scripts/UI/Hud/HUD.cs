@@ -1,4 +1,5 @@
 using TMPro;
+using UnBocal.TweeningSystem;
 using UnityEngine;
 
 public class HUD : MonoBehaviour
@@ -14,13 +15,35 @@ public class HUD : MonoBehaviour
     // -------~~~~~~~~~~================# // Pages
     [Header("Pages")]
     [SerializeField] private Transform _pageContainer;
-    private int _currentPageIndex = 0;
+    private string _defaultPage;
+
+    // -------~~~~~~~~~~================# // Animation
+    private Tween _textAnimator = new Tween();
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
     private void Awake()
     {
         EventBus.CameraFadeMid += AskChange;
         EventBus.RoomChanged += UpdateRoom;
+        EventBus.CheckAnomalyDone += ShowDefaultPage;
+        EventBus.TimeUpdated += UpdateTime;
+    }
+
+    private void OnDestroy()
+    {
+        EventBus.CameraFadeMid -= AskChange;
+        EventBus.RoomChanged -= UpdateRoom;
+        EventBus.CheckAnomalyDone -= ShowDefaultPage;
+        EventBus.TimeUpdated -= UpdateTime;
+    }
+
+    private void Start()
+    {
+        if (_pageContainer.childCount > 0)
+        {
+            _defaultPage = _pageContainer.GetChild(0).name;
+            ShowDefaultPage();
+        }
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Change Room
@@ -45,26 +68,29 @@ public class HUD : MonoBehaviour
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Update
     private void UpdateRoom(Room pRoom)
     {
-        _roomText.text = pRoom.name;
+        Tween.Kill(_roomText);
+        _textAnimator.Clear();
+        _textAnimator.Whrite(_roomText, pRoom.name, .5f);
+        _textAnimator.Start();
     }
 
-    private void UpdateTime(Room pRoom)
+    private void UpdateTime(int pHours, int pMinutes) => _timeText.text = $"{FormatTime(pHours)} : {FormatTime(pMinutes)}";
+
+    private string FormatTime(int pTime)
     {
-        
+        string lTime = $"{pTime}";
+        return lTime.Length <= 1 ? $"0{lTime}" : $"{lTime}";
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Pages
-    public void TooglePages()
+    public void ShowPage(string pPageName)
     {
         int lPageCount = _pageContainer.childCount;
-        int lOldIndex = _currentPageIndex;
-        int lNewIndex = (lOldIndex + 1) % _pageContainer.childCount;
-
-        if (lOldIndex >= lPageCount || lNewIndex >= lPageCount) return;
-
-        _pageContainer.GetChild(lOldIndex).gameObject.SetActive(false);
-        _pageContainer.GetChild(lNewIndex).gameObject.SetActive(true);
-
-        _currentPageIndex = lNewIndex;
+        for (int lPageIndex = 0; lPageIndex < lPageCount; lPageIndex++)
+            Show(_pageContainer.GetChild(lPageIndex), pPageName);
     }
+
+    private void ShowDefaultPage() => ShowPage(_defaultPage);
+
+    private void Show(Transform pPage, string pName) => pPage.gameObject.SetActive(pPage.name == pName);
 }

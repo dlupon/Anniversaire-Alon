@@ -4,6 +4,7 @@
 using UnityEngine;
 using UnBocal.TweeningSystem.Interpolations;
 using UnityEngine.UI;
+using TMPro;
 
 namespace UnBocal.TweeningSystem
 {
@@ -32,6 +33,8 @@ namespace UnBocal.TweeningSystem
             {
                 case Text lT: lInterpolationMethod  = (float pRatio) => lT.text = pText.Whrite(pEasing(pRatio)); break;
                 case TextMesh lTM: lInterpolationMethod  = (float pRatio) => lTM.text = pText.Whrite(pEasing(pRatio)); break;
+                case TextMeshPro lTMP: lInterpolationMethod  = (float pRatio) => lTMP.text = pText.Whrite(pEasing(pRatio)); break;
+                case TextMeshProUGUI lTMPGUI: lInterpolationMethod  = (float pRatio) => lTMPGUI.text = pText.Whrite(pEasing(pRatio)); break;
 
                 default: return Error.InterpolationNotSupported(pTarget, nameof(Whrite));
             }

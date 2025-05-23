@@ -406,6 +406,7 @@ GameObject:
   - component: {fileID: 1342992126}
   - component: {fileID: 1342992127}
   - component: {fileID: 1342992128}
+  - component: {fileID: 1342992129}
   m_Layer: 0
   m_Name: RoomContainer
   m_TagString: Untagged
@@ -461,6 +462,22 @@ MonoBehaviour:
   _startCooldown: 0.25
   _baseCooldown: 1
   _maxCooldownOffset: 1
+  _maxAnomalyCount: 3
+  _reportCooldDown: 5
+--- !u!114 &1342992129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342992125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed326f5987d5fd545b7da1c901d09af8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hourCount: 6
+  _maxTimeInMinutes: 6
 --- !u!1001 &1484327609
 PrefabInstance:
   m_ObjectHideFlags: 0
