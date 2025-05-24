@@ -5,8 +5,13 @@ using UnityEngine.UI;
 
 public class GameView : MonoBehaviour
 {
+    // -------~~~~~~~~~~================# // Components
+    [Header("Components")]
     [SerializeField] private RawImage _view;
     [SerializeField] private TextMeshProUGUI _text;
+    
+    // -------~~~~~~~~~~================# // Animations
+    [Header("Animations")]
     [SerializeField] private Color _white = Color.white;
     [SerializeField] private Color _black = Color.black;
     [SerializeField] private float _fadeIn = .1f;
@@ -14,6 +19,7 @@ public class GameView : MonoBehaviour
     [SerializeField] private float _fadeOut = .2f;
     private Tween _animator = new Tween();
 
+    // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
     private void Awake()
     {
         EventBus.NeedCameraFade += StartFade;
@@ -30,6 +36,7 @@ public class GameView : MonoBehaviour
         EventBus.AnomalyNotFounded -= AnomalyNotFound;
     }
 
+    // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Animations
     private void StartFade()
     {
         Tween.Kill(_view);
@@ -39,10 +46,7 @@ public class GameView : MonoBehaviour
         _animator.Start();
     }
 
-    private void OnFadeMid()
-    {
-        EventBus.CameraFadeMid?.Invoke();
-    }
+    private void OnFadeMid() => EventBus.CameraFadeMid?.Invoke();
 
     private void Searching()
     {

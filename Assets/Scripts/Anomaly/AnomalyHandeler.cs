@@ -16,6 +16,8 @@ public class AnomalyHandeler : MonoBehaviour
     {
         transform.GetComponentsInChildren(_anomalies);
         _anomalies.Sort(new RandomComparer());
+
+        Debug.Log($"{name} -> {_anomalies.Count}");
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Behaviour
@@ -44,4 +46,4 @@ public class AnomalyHandeler : MonoBehaviour
     }
 }
 
-public enum Anomaly { Missing, Extra, Movement, Picture, Other }
+public enum Anomaly { Missing, Extra, Movement, Replacement}

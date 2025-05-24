@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Room : MonoBehaviour
@@ -15,6 +14,12 @@ public class Room : MonoBehaviour
         Hide();
 
         EventBus.RoomInit?.Invoke(this);
+    }
+
+    // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Camera
+    private void SetCameraRender(RenderTexture pTexture)
+    {
+        _camera.targetTexture = pTexture;
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Visibility

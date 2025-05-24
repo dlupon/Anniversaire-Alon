@@ -6,14 +6,32 @@ using UnityEngine.UI;
 
 public class ReportSystem : MonoBehaviour
 {
+    // -------~~~~~~~~~~================# // Components
     [SerializeField] private Transform _buttonContainer;
     [SerializeField] private Button _buttonFactory;
+    [SerializeField] private GameObject _inputBlock;
 
+    // -------~~~~~~~~~~================# // Input
+    private bool _isInputReactive = true;
+
+    // -------~~~~~~~~~~================# // Animations
     private Tween _animator = new Tween();
+
+    // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
+    private void Awake()
+    {
+        EventBus.CheckAnomalyDone += EnableInput;
+    }
+
+    private void OnDestroy()
+    {
+        EventBus.CheckAnomalyDone -= EnableInput;
+    }
 
     private void Start()
     {
         UpdateAnomalies();
+        EnableInput();
     }
 
     private void OnEnable()
@@ -21,6 +39,7 @@ public class ReportSystem : MonoBehaviour
         PlayFadeAnimation();
     }
 
+    // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Buttons
     private void UpdateAnomalies()
     {
         string[] lAllNames = Enum.GetNames(typeof(Anomaly));
@@ -36,12 +55,21 @@ public class ReportSystem : MonoBehaviour
         lCurrentButton.onClick.AddListener(() => Report(pName));
     }
 
+
     private void Report(string pName)
     {
+        DisableInput();
+        
         EventBus.Report?.Invoke();
         EventBus.ReportAnomaly?.Invoke(pName);
     }
 
+    // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Input
+    private void EnableInput() => _inputBlock.SetActive(!(_isInputReactive = true));
+
+    private void DisableInput() => _inputBlock.SetActive(!(_isInputReactive = false));
+
+    // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Animations
     private void PlayFadeAnimation()
     {
         _animator.CompleteAndClear();
@@ -59,7 +87,7 @@ public class ReportSystem : MonoBehaviour
         CanvasGroup lCanva = _buttonContainer.GetChild(pIndex).GetComponent<CanvasGroup>();
         TextMeshProUGUI lText = lCanva.GetComponentInChildren<TextMeshProUGUI>();
 
-        float lDuration = .4f;
+        float lDuration = .25f;
         float lDelay = .1f * pIndex;
 
         _animator.Interpolate<float>(lCanva, (x) => lCanva.alpha = x, 0f, 1f, lDuration, EaseType.Flat, lDelay);

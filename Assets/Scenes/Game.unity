@@ -198,6 +198,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1342992126}
     m_Modifications:
+    - target: {fileID: 941050218408372117, guid: bd5071cf0bff12e4892337c4a290b5b7, type: 3}
+      propertyPath: volumeTrigger
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1738641298047544184, guid: bd5071cf0bff12e4892337c4a290b5b7, type: 3}
       propertyPath: m_Name
       value: Cuisine
@@ -264,6 +268,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1342992126}
     m_Modifications:
+    - target: {fileID: 941050218408372117, guid: 9009773990a8de944b8fa24a2448910a, type: 3}
+      propertyPath: volumeTrigger
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1738641298047544184, guid: 9009773990a8de944b8fa24a2448910a, type: 3}
       propertyPath: m_Name
       value: Couloir
@@ -335,6 +343,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1342992126}
     m_Modifications:
+    - target: {fileID: 941050218408372117, guid: f31a53641c60593418921268c56bbccb, type: 3}
+      propertyPath: volumeTrigger
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1738641298047544184, guid: f31a53641c60593418921268c56bbccb, type: 3}
       propertyPath: m_Name
       value: Chambre
@@ -486,6 +498,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1342992126}
     m_Modifications:
+    - target: {fileID: 941050218408372117, guid: f991c67a74097d647971c8f1a5b8f148, type: 3}
+      propertyPath: volumeTrigger
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1738641298047544184, guid: f991c67a74097d647971c8f1a5b8f148, type: 3}
       propertyPath: m_Name
       value: Salon
@@ -655,9 +671,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1342992126}
     m_Modifications:
+    - target: {fileID: 941050218408372117, guid: 132663f7c3bd5f045a8c5e9528f858f4, type: 3}
+      propertyPath: volumeTrigger
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1738641298047544184, guid: 132663f7c3bd5f045a8c5e9528f858f4, type: 3}
       propertyPath: m_Name
       value: Entree
+      objectReference: {fileID: 0}
+    - target: {fileID: 1738641298047544184, guid: 132663f7c3bd5f045a8c5e9528f858f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2238260275922436498, guid: 132663f7c3bd5f045a8c5e9528f858f4, type: 3}
       propertyPath: m_LocalPosition.x
