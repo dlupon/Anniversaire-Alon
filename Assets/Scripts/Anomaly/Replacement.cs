@@ -2,12 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Replacement : MonoBehaviour, IAnomaly
+public class Replacement : Anomaly
 {
-    // -------~~~~~~~~~~================# // Anomaly
-    public bool IsActive { get; set; } = false;
-    public string Type => $"{Anomaly.Replacement}";
-
     // -------~~~~~~~~~~================# // Movement
     [SerializeField] private MeshRenderer _target;
     private List<Transform> _otherObjects = new List<Transform>();
@@ -15,11 +11,18 @@ public class Replacement : MonoBehaviour, IAnomaly
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
     private void Start()
     {
+        Type = $"{AnomalyType.Replacement}";
+
+        _target = _target == null ? GetComponent<MeshRenderer>() : _target;
+        
+        Debug.Log(name);
+
         transform.GetComponentsInChildren(_otherObjects);
         if (_otherObjects.Contains(transform)) _otherObjects.Remove(transform);
         _otherObjects.Sort(new RandomComparer());
 
         Do((x) => x.gameObject.SetActive(false));
+
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Behaviour
@@ -28,10 +31,9 @@ public class Replacement : MonoBehaviour, IAnomaly
         foreach (Transform pObjet in _otherObjects) pMethod(pObjet);
     }
 
-    public void Trigger()
+    public override void Trigger()
     {
-        Debug.Log(name);
-        IsActive = true;
+        base.Trigger();
 
         Transform lObject = _otherObjects[0];
         _otherObjects.Remove(lObject);
@@ -42,9 +44,9 @@ public class Replacement : MonoBehaviour, IAnomaly
         lObject.gameObject.SetActive(true);
     }
 
-    public void Fix()
+    public override void Fix()
     {
-        IsActive = false;
+        base.Fix();
 
         Do((x) => x.gameObject.SetActive(false));
         _target.enabled = true;

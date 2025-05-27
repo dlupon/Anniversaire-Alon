@@ -26,7 +26,7 @@ public class AnomalyManager : MonoBehaviour
     [Header("Anomalies")]
     [SerializeField] private int _maxAnomalyCount = 3;
     [SerializeField] private float _reportCooldDown = 5f;
-    private List<IAnomaly> _anomalies = new List<IAnomaly>();
+    private List<Anomaly> _anomalies = new List<Anomaly>();
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
     private void Awake()
@@ -72,12 +72,10 @@ public class AnomalyManager : MonoBehaviour
 
     private void TriggerAnomaly()
     {
-        Debug.Log(_rooms.Count);
-
         int lRandomIndex = Random.Range(0, _rooms.Count);
         int lRoomIndex = 0;
         Room lRoom;
-        IAnomaly lNewAnomaly;
+        Anomaly lNewAnomaly;
 
         do
         {
@@ -111,7 +109,7 @@ public class AnomalyManager : MonoBehaviour
             
         yield return new WaitForSeconds(_reportCooldDown);
 
-        IAnomaly lAnomaly = _currentRoom.AnomalyHandeler.Fix(pAnomaly);
+        Anomaly lAnomaly = _currentRoom.AnomalyHandeler.Fix(pAnomaly);
 
         if (lAnomaly == null) FixFailed();
         else FixedSuccessfully(lAnomaly);
@@ -123,7 +121,7 @@ public class AnomalyManager : MonoBehaviour
 
     private void FixFailed() => EventBus.AnomalyNotFounded?.Invoke();
 
-    private void FixedSuccessfully(IAnomaly pAnomaly)
+    private void FixedSuccessfully(Anomaly pAnomaly)
     {
         _anomalies.Remove(pAnomaly);
         _activeRooms.Remove(_currentRoom);

@@ -86,50 +86,6 @@ MonoBehaviour:
   scale:
     overrideState: 0
     value: 1
---- !u!114 &-2260248930081052604
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40b924e2dad56384a8df2a1e111bb675, type: 3}
-  m_Name: Vignette
-  m_EditorClassIdentifier: 
-  active: 1
-  enabled:
-    overrideState: 1
-    value: 1
-  mode:
-    overrideState: 1
-    value: 0
-  color:
-    overrideState: 1
-    value: {r: 0, g: 0, b: 0, a: 1}
-  center:
-    overrideState: 0
-    value: {x: 0.5, y: 0.5}
-  intensity:
-    overrideState: 1
-    value: 0.645
-  smoothness:
-    overrideState: 1
-    value: 0.424
-  roundness:
-    overrideState: 1
-    value: 0.077
-  rounded:
-    overrideState: 0
-    value: 0
-  mask:
-    overrideState: 0
-    value: {fileID: 0}
-    defaultState: 1
-  opacity:
-    overrideState: 0
-    value: 1
 --- !u!114 &-1076499600668513112
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -172,12 +128,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
   - {fileID: -5360940616791413134}
-  - {fileID: -2260248930081052604}
   - {fileID: -1076499600668513112}
   - {fileID: -5807953744409010976}
   - {fileID: 3807728188145487766}
   - {fileID: 995386647919613721}
   - {fileID: 2479240822801779815}
+  - {fileID: 1847099798173622302}
 --- !u!114 &995386647919613721
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -199,10 +155,10 @@ MonoBehaviour:
     value: 24.19
   threshold:
     overrideState: 1
-    value: 1
+    value: 1.27
   softKnee:
-    overrideState: 0
-    value: 0.5
+    overrideState: 1
+    value: 1
   clamp:
     overrideState: 0
     value: 65472
@@ -225,6 +181,28 @@ MonoBehaviour:
   dirtIntensity:
     overrideState: 0
     value: 0
+--- !u!114 &1847099798173622302
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b94fcd11afffcb142908bfcb1e261fba, type: 3}
+  m_Name: MotionBlur
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  shutterAngle:
+    overrideState: 1
+    value: 270
+  sampleCount:
+    overrideState: 1
+    value: 32
 --- !u!114 &2479240822801779815
 MonoBehaviour:
   m_ObjectHideFlags: 3

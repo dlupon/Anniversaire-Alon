@@ -31,10 +31,10 @@ namespace UnBocal.TweeningSystem
 
             switch (pTarget)
             {
-                case Text lT: lInterpolationMethod  = (float pRatio) => lT.text = pText.Whrite(pEasing(pRatio)); break;
-                case TextMesh lTM: lInterpolationMethod  = (float pRatio) => lTM.text = pText.Whrite(pEasing(pRatio)); break;
-                case TextMeshPro lTMP: lInterpolationMethod  = (float pRatio) => lTMP.text = pText.Whrite(pEasing(pRatio)); break;
-                case TextMeshProUGUI lTMPGUI: lInterpolationMethod  = (float pRatio) => lTMPGUI.text = pText.Whrite(pEasing(pRatio)); break;
+                case Text lT: lInterpolationMethod  = (float pRatio) => lT.text = Lerp.Whrite(pText, pEasing(pRatio)); break;
+                case TextMesh lTM: lInterpolationMethod  = (float pRatio) => lTM.text = Lerp.Whrite(pText, pEasing(pRatio)); break;
+                case TextMeshPro lTMP: lInterpolationMethod  = (float pRatio) => lTMP.text = Lerp.Whrite(pText,pEasing(pRatio)); break;
+                case TextMeshProUGUI lTMPGUI: lInterpolationMethod  = (float pRatio) => lTMPGUI.text = Lerp.Whrite(pText, pEasing(pRatio)); break;
 
                 default: return Error.InterpolationNotSupported(pTarget, nameof(Whrite));
             }

@@ -28,7 +28,7 @@ namespace UnBocal.TweeningSystem
         {
             Action<float> lInterpolationMethod = null;
 
-            if (pStartPosition == pEndPosition)
+            if (pStartPosition != pEndPosition)
             {
                 switch (pRef)
                 {

@@ -9,6 +9,7 @@ namespace UnBocal.TweeningSystem
     public enum EaseType
     {
         Flat,
+        InFlat,
         InSin,
         InCubic,
         InQuad,
@@ -19,6 +20,7 @@ namespace UnBocal.TweeningSystem
         InBack,
         InBounce,
         InExpo,
+        OutFlat,
         OutSin,
         OutCubic,
         OutQuad,
@@ -29,6 +31,7 @@ namespace UnBocal.TweeningSystem
         OutBack,
         OutBounce,
         OutExpo,
+        InOutFlat,
         InOutSin,
         InOutCubic,
         InOutQuad,
@@ -64,7 +67,6 @@ namespace UnBocal.TweeningSystem
 
             return pEaseType switch
             {
-                EaseType.Flat => pLi,
                 EaseType.InSin => InSin(pLi),
                 EaseType.InCubic => InCubic(pLi),
                 EaseType.InQuad => InQuad(pLi),
@@ -108,7 +110,6 @@ namespace UnBocal.TweeningSystem
         {
             return pEaseType switch
             {
-                EaseType.Flat => Flat,
                 EaseType.InSin => InSin,
                 EaseType.InCubic => InCubic,
                 EaseType.InQuad => InQuad,
@@ -119,6 +120,7 @@ namespace UnBocal.TweeningSystem
                 EaseType.InBack => InBack,
                 EaseType.InBounce => InBounce,
                 EaseType.InExpo => InExpo,
+
                 EaseType.OutSin => OutSin,
                 EaseType.OutCubic => OutCubic,
                 EaseType.OutQuad => OutQuad,
@@ -129,6 +131,7 @@ namespace UnBocal.TweeningSystem
                 EaseType.OutBack => OutBack,
                 EaseType.OutBounce => OutBounce,
                 EaseType.OutExpo => OutExpo,
+
                 EaseType.InOutSin => InOutSin,
                 EaseType.InOutCubic => InOutCubic,
                 EaseType.InOutQuad => InOutQuad,
@@ -142,7 +145,54 @@ namespace UnBocal.TweeningSystem
                 _ => Flat,
             };
         }
-        
+
+        public static Func<float, float> GetShakeFunction(EaseType pEaseType = EaseType.Flat)
+        {
+            return pEaseType switch
+            {
+                EaseType.Flat => (x) => 1f,
+
+                EaseType.InFlat => Flat,
+                EaseType.InSin => InSin,
+                EaseType.InCubic => InCubic,
+                EaseType.InQuad => InQuad,
+                EaseType.InQuart => InQuart,
+                EaseType.InQuint => InQuint,
+                EaseType.InCirc => InCirc,
+                EaseType.InElastic => InElastic,
+                EaseType.InBack => InBack,
+                EaseType.InBounce => InBounce,
+                EaseType.InExpo => InExpo,
+
+                EaseType.OutFlat => (x) => 1 - Flat(x),
+                EaseType.OutSin => (x) => 1 - OutSin(x),
+                EaseType.OutCubic => (x) => 1 - OutCubic(x),
+                EaseType.OutQuad => (x) => 1 - OutQuad(x),
+                EaseType.OutQuart => (x) => 1 - OutQuart(x),
+                EaseType.OutQuint => (x) => 1 - OutQuint(x),
+                EaseType.OutCirc => (x) => 1 - OutCirc(x),
+                EaseType.OutElastic => (x) => 1 - OutElastic(x),
+                EaseType.OutBack => (x) => 1 - OutBack(x),
+                EaseType.OutBounce => (x) => 1 - OutBounce(x),
+                EaseType.OutExpo => (x) => 1 - OutExpo(x),
+
+                EaseType.InOutFlat => (x) => UpDown(x),
+                EaseType.InOutSin => (x) => UpDown(InOutSin(x)),
+                EaseType.InOutCubic => (x) => UpDown(InOutCubic(x)),
+                EaseType.InOutQuad => (x) => UpDown(InOutQuad(x)),
+                EaseType.InOutQuart => (x) => UpDown(InOutQuart(x)),
+                EaseType.InOutQuint => (x) => UpDown(InOutQuint(x)),
+                EaseType.InOutCirc => (x) => UpDown(InOutCirc(x)),
+                EaseType.InOutElastic => (x) => UpDown(InOutElastic(x)),
+                EaseType.InOutBack => (x) => UpDown(InOutBack(x)),
+                EaseType.InOutBounce => (x) => UpDown(InOutBounce(x)),
+                EaseType.InOutExpo => (x) => UpDown(InOutExpo(x)),
+                _ => Flat,
+            };
+        }
+
+        public static float UpDown(float pRatio) => -2 * Mathf.Abs(pRatio - .5f) + 1;
+
         public static float Flat(float pRatio) => pRatio;
 
         #region easeIns
@@ -188,7 +238,7 @@ namespace UnBocal.TweeningSystem
 
         public static float InExpo(float pX)
         {
-            return Mathf.Exp(pX);
+            return pX == 0f ? 0f : Mathf.Pow(2, 10 * pX - 10);
         }
 
         /// <summary>

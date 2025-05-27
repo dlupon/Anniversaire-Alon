@@ -42,7 +42,7 @@ public class ReportSystem : MonoBehaviour
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Buttons
     private void UpdateAnomalies()
     {
-        string[] lAllNames = Enum.GetNames(typeof(Anomaly));
+        string[] lAllNames = Enum.GetNames(typeof(AnomalyType));
 
         foreach (string lName in lAllNames)
             CreateButton(lName);

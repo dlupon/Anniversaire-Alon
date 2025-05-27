@@ -53,7 +53,7 @@ public class GameView : MonoBehaviour
         _text.color = _white;
         _animator.StopAndClear();
         _animator.Whrite(_text, "Searching...", 1);
-        _animator.Color(_view, _black, _fadeOut, pDelay: _fadeIn + _wait);
+        // _animator.Color(_view, _black, _fadeOut, pDelay: _fadeIn + _wait);
         _animator.Start();
     }
 
@@ -61,9 +61,7 @@ public class GameView : MonoBehaviour
     {
         _animator.StopAndClear();
         _animator.Whrite(_text, "Anomaly Removed", 1);
-        _animator.Color(_view, _black, _white, _fadeOut, pDelay: _fadeIn + _wait);
-        _animator.Color(_view, _black, _white, _fadeOut, pDelay: _fadeIn + _wait);
-        _animator.Color(_text, _white, new Color(1, 1, 1, 0), _fadeOut, pDelay: 3f);
+        AnomalyDone();
         _animator.Start();
     }
 
@@ -71,8 +69,14 @@ public class GameView : MonoBehaviour
     {
         _animator.StopAndClear();
         _animator.Whrite(_text, "Anomaly Not Found", 1);
-        _animator.Color(_view, _black, _white, _fadeOut, pDelay: _fadeIn + _wait);
-        _animator.Color(_text, _white, new Color(1, 1, 1, 0), _fadeOut, pDelay: 3f);
+        AnomalyDone();
         _animator.Start();
+    }
+
+    private void AnomalyDone()
+    {
+        _view.color = _black;
+        _animator.Color(_view, _black, _white, .3f, pDelay: 1f);
+        _animator.Color(_text, _white, new Color(1, 1, 1, 0), _fadeOut, pDelay: 3f);
     }
 }
