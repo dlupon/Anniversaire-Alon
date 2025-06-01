@@ -12,7 +12,7 @@ public class Extra : Anomaly
 
     private void Start()
     {
-        Type = $"{AnomalyType.Missing}";
+        Type = $"{AnomalyType.Extra}";
 
         _target = _target == null ? transform : _target;
         _baseScale = _target.localScale;

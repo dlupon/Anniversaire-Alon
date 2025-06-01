@@ -44,4 +44,4 @@ public class AnomalyHandeler : MonoBehaviour
     }
 }
 
-public enum AnomalyType { Missing, Extra, Movement, Replacement}
+public enum AnomalyType { Missing, Extra, Movement, Replacement, Lighting }

@@ -15,6 +15,7 @@ namespace UnBocal.TweeningSystem
         => pTarget switch
         {
             Material lM => lM.color,
+            Light lM => lM.color,
             SpriteRenderer lM => lM.color,
             RawImage lM => lM.color,
             Image lM => lM.color,
@@ -50,6 +51,9 @@ namespace UnBocal.TweeningSystem
 
                     // Material
                     case Material lM: lInterpolationMethod = (float pRatio) => lM.color = lInterpolation(pRatio); break;
+
+                    // Light
+                    case Light lL: lInterpolationMethod = (float pRatio) => lL.color = lInterpolation(pRatio); break;
 
                     // Images
                     case SpriteRenderer lS: lInterpolationMethod = (float pRatio) => lS.color = lInterpolation(pRatio); break;

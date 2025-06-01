@@ -44,7 +44,7 @@ public class Movement : Anomaly
         _points.Remove(lPoint);
         _points.Add(lPoint);
 
-        _animator.StopAndClear();
+        Tween.Kill(_target);
         _animator.Scale(_target, lPoint.localScale, 1f, EaseType.InOutExpo);
         _animator.Position(_target, lPoint.position, 1f, EaseType.InOutExpo);
         _animator.Rotation(_target, lPoint.rotation, 1f, EaseType.InOutExpo);

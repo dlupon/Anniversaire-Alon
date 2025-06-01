@@ -9,12 +9,12 @@ public class Anomaly : MonoBehaviour
     public virtual void Trigger()
     {
         IsActive = true;
-        Debug.Log($"{name} Triggered");
+        Debug.Log($"{Type} {name} Triggered");
     }
 
     public virtual void Fix()
     {
         IsActive = false;
-        Debug.Log($"{name} Fixed");
+        Debug.Log($"{Type} {name} Fixed");
     }
 }

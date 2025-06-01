@@ -227,10 +227,11 @@ namespace UnBocal.TweeningSystem
         public void CompleteAndClear(object pObject, string pProperty) { Complete(pObject, pProperty); Clear(pObject, pProperty); }
         #endregion
 
-        #region // -------~~~~~~~~~~================# // Loop
-        public void SetLooping(bool pLoop)
+        #region // -------~~~~~~~~~~================# // Reset
+        public void Reset()
         {
-            
+            Stop();
+            DoOnInterpolations((x) => x.InterpolationMethod(0));
         }
         #endregion
 
