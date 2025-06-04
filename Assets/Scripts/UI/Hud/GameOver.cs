@@ -34,8 +34,6 @@ public class GameOver : MonoBehaviour
 
         for (int lAnomalyIndex = 0; lAnomalyIndex < lAnomalyCount; lAnomalyIndex++)
         {
-            Debug.LogError($"{lAnomalyIndex} -> {pAnomalies.Count}");
-
             _anomalyTextFactory.text = $"{pAnomalies[lAnomalyIndex].Type} in {pAnomalies[lAnomalyIndex].Room}";
 
             if (lAnomalyIndex >= lAnomalyCount - 1) break;

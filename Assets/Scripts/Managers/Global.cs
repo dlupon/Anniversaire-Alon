@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 public static class EventBus
 {
@@ -25,6 +26,9 @@ public static class EventBus
     public static Action AnomalyFixed;
     public static Action AnomalyNotFounded;
     public static Action TooManyAnomalies;
+
+    // -------~~~~~~~~~~================# // Warning
+    public static Action<string, float, UnityEngine.Color> Warn;
 
     // -------~~~~~~~~~~================# // Time
     public static Action<int, int> TimeUpdated;

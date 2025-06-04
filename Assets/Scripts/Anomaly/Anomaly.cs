@@ -10,12 +10,16 @@ public class Anomaly : MonoBehaviour
     public virtual void Trigger()
     {
         IsActive = true;
-        Debug.Log($"{Type} {name} Triggered");
+        Debug.Log($"<color=#fcba03>{nameof(Anomaly)}</color> :" +
+            $" <color=#46e0e0>{Room} -> {Type} {name}</color> ->" +
+            $" <color=#d17ffa>Triggered</color>");
     }
 
     public virtual void Fix()
     {
         IsActive = false;
-        Debug.Log($"{Type} {name} Fixed");
+        Debug.Log($"<color=#fcba03>{nameof(Anomaly)}</color> :" +
+            $" <color=#46e0e0>{Room} -> {Type} {name}</color> ->" +
+            $" <color=#d17ffa>Fixed</color>");
     }
 }

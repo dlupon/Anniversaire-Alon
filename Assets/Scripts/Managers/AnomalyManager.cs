@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 public class AnomalyManager : MonoBehaviour
@@ -20,6 +19,7 @@ public class AnomalyManager : MonoBehaviour
     // -------~~~~~~~~~~================# // Rooms
     private List<Room> _rooms;
     private List<Room> _activeRooms = new List<Room>();
+    private List<Room> _disabledRooms = new List<Room>();
     private Room _currentRoom;
 
     // -------~~~~~~~~~~================# // Anomalies
@@ -71,14 +71,15 @@ public class AnomalyManager : MonoBehaviour
         while (_isActive)
         {
             yield return new WaitForSeconds(lCurrentCooldown);
-            Debug.LogError("Try Trigger Anomaly");
+            Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Try Trigger Anomaly");
             TryTriggerAnomaly();
+            EnableNextRoom();
             yield return CheckTooManyAnomalies();
             lCurrentCooldown = _baseCooldown + _maxCooldownOffset - Random.value * _maxCooldownOffset * 2;
         }
     }
 
-    // -------~~~~~~~~~~================# // Triggering
+    // -------~~~~~~~~~~================# // Triggering / Rooms
     private void TryTriggerAnomaly()
     {
         int lRandomIndex = Random.Range(0, _rooms.Count);
@@ -103,15 +104,24 @@ public class AnomalyManager : MonoBehaviour
             _rooms.Remove(lRoom);
             _activeRooms.Add(lRoom);
             
-            Debug.LogError("New Anomaly Triggered");
+            Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : New Anomaly Successfully Triggered");
 
             return;
 
         } while (++lRoomIndex < _rooms.Count);
 
-        Debug.LogError("Can't Trigger Anomaly");
+        Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Can't Trigger Anomaly");
 
         return;
+    }
+
+    private void EnableNextRoom()
+    {
+        if (_disabledRooms.Count <= 0) return;
+
+        Room lRoom = _disabledRooms[0];
+        _disabledRooms.Remove(lRoom);
+        _rooms.Add(lRoom);
     }
 
     // -------~~~~~~~~~~================# // Fixing
@@ -143,7 +153,7 @@ public class AnomalyManager : MonoBehaviour
     {
         _anomalies.Remove(pAnomaly);
         _activeRooms.Remove(_currentRoom);
-        _rooms.Add(_currentRoom);
+        _disabledRooms.Add(_currentRoom);
 
         EventBus.AnomalyFixed?.Invoke();
     }
@@ -151,10 +161,10 @@ public class AnomalyManager : MonoBehaviour
     // -------~~~~~~~~~~================# // Too Many Anomalies
     private IEnumerator CheckTooManyAnomalies()
     {
-        Debug.LogError($"Too Many Anomalies : {_tooManyAnomalies}");
+        Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Too Many Anomalies : {_tooManyAnomalies}");
         if (_tooManyAnomalies)
         {
-            Debug.LogError("WAIT FOR CHECKING");
+            Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Wait For Checking Game Over / Warning");
             yield return new WaitForSeconds(_warned ? _timeBeforeDeath : _timeBeforeWarning);
             yield return new WaitUntil(() => !_isSearching);
             CheckGameOver();
@@ -166,7 +176,7 @@ public class AnomalyManager : MonoBehaviour
     private void CheckGameOver()
     {
         if (!_warned || !_tooManyAnomalies) return;
-        Debug.LogError("GameOver");
+        Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Game Over");
         GameOver();
     }
 
@@ -185,7 +195,7 @@ public class AnomalyManager : MonoBehaviour
     private void TryWarn()
     {
         if (_warned || !_tooManyAnomalies) return;
-        Debug.LogError("Warning");
+        Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Warning");
         Warn();
     }
 
@@ -194,5 +204,6 @@ public class AnomalyManager : MonoBehaviour
         _warned = true;
 
         EventBus.TooManyAnomalies?.Invoke();
+        EventBus.Warn?.Invoke("/!\\ WARNING THERE IS TOO MANY ANOMALIES /!\\ ", 5, Color.red);
     }
 }

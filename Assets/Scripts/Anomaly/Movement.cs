@@ -27,8 +27,6 @@ public class Movement : Anomaly
         _basePosition = _target.position;
         _baseRotation = _target.rotation;
 
-        Debug.Log(name);
-
         _pointContainer.GetComponentsInChildren(_points);
         if (_points.Count > 1 && _points.Contains(_pointContainer)) _points.Remove(_pointContainer);
         _points.Sort(new RandomComparer());

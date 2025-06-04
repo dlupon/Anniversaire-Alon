@@ -22,6 +22,7 @@ public class GameView : MonoBehaviour
     [SerializeField] private float _wait = .1f;
     [SerializeField] private float _fadeOut = .2f;
     private Tween _animator = new Tween();
+    private Tween _warningAnomator = new Tween();
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
     private void Awake()
@@ -30,7 +31,7 @@ public class GameView : MonoBehaviour
         EventBus.Report += Searching;
         EventBus.AnomalyFixed += AnomalyRemoved;
         EventBus.AnomalyNotFounded += AnomalyNotFound;
-        EventBus.TooManyAnomalies += Warn;
+        EventBus.Warn += Warn;
     }
     
     private void OnDestroy()
@@ -39,13 +40,7 @@ public class GameView : MonoBehaviour
         EventBus.Report -= Searching;
         EventBus.AnomalyFixed -= AnomalyRemoved;
         EventBus.AnomalyNotFounded -= AnomalyNotFound;
-        EventBus.TooManyAnomalies -= Warn;
-    }
-
-    private void Start()
-    {
-        _warningText = _warning.text;
-        _warning.text = "";
+        EventBus.Warn -= Warn;
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Animations
@@ -98,12 +93,13 @@ public class GameView : MonoBehaviour
         _animator.Color(_text, _white, new Color(1, 1, 1, 0), _fadeOut, pDelay: 3f);
     }
 
-    private void Warn()
+    private void Warn(string pMessage, float pDuration, Color pColor)
     {
-        _animator.Clear(_warning);
-        _animator.Whrite(_warning, _warningText, 2f);
-        _animator.Whrite(_warning, "", 0f, pDelay:5f);
+        _warningAnomator.CompleteAndClear();
+
+        _warning.color = pColor;
+        _animator.Whrite(_warning, pMessage, 2f);
+        _animator.Whrite(_warning, "", 0f, pDelay: 2f +  pDuration);
         _animator.Play();
-        _animator.Clear(_warning);
     }
 }
