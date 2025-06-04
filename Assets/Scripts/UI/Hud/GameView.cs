@@ -1,5 +1,6 @@
 using TMPro;
 using UnBocal.TweeningSystem;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,9 @@ public class GameView : MonoBehaviour
     [Header("Components")]
     [SerializeField] private RawImage _view;
     [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private TextMeshProUGUI _warning;
+
+    private string _warningText;
     
     // -------~~~~~~~~~~================# // Animations
     [Header("Animations")]
@@ -26,6 +30,7 @@ public class GameView : MonoBehaviour
         EventBus.Report += Searching;
         EventBus.AnomalyFixed += AnomalyRemoved;
         EventBus.AnomalyNotFounded += AnomalyNotFound;
+        EventBus.TooManyAnomalies += Warn;
     }
     
     private void OnDestroy()
@@ -34,12 +39,20 @@ public class GameView : MonoBehaviour
         EventBus.Report -= Searching;
         EventBus.AnomalyFixed -= AnomalyRemoved;
         EventBus.AnomalyNotFounded -= AnomalyNotFound;
+        EventBus.TooManyAnomalies -= Warn;
+    }
+
+    private void Start()
+    {
+        _warningText = _warning.text;
+        _warning.text = "";
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Animations
     private void StartFade()
     {
         Tween.Kill(_view);
+
         _animator.Clear();
         _animator.Color(_view, _black, _fadeIn).OnFinished += OnFadeMid;
         _animator.Color(_view, _black, _white, _fadeOut, pDelay: _fadeIn + _wait);
@@ -50,16 +63,19 @@ public class GameView : MonoBehaviour
 
     private void Searching()
     {
+        Tween.KillAndClear(_text);
+        Tween.KillAndClear(_view);
+
         _text.color = _white;
-        _animator.StopAndClear();
         _animator.Whrite(_text, "Searching...", 1);
-        // _animator.Color(_view, _black, _fadeOut, pDelay: _fadeIn + _wait);
         _animator.Start();
     }
 
     private void AnomalyRemoved()
     {
-        _animator.StopAndClear();
+        Tween.KillAndClear(_text);
+        Tween.KillAndClear(_view);
+
         _animator.Whrite(_text, "Anomaly Removed", 1);
         AnomalyDone();
         _animator.Start();
@@ -67,7 +83,9 @@ public class GameView : MonoBehaviour
 
     private void AnomalyNotFound()
     {
-        _animator.StopAndClear();
+        Tween.KillAndClear(_text);
+        Tween.KillAndClear(_view);
+
         _animator.Whrite(_text, "Anomaly Not Found", 1);
         AnomalyDone();
         _animator.Start();
@@ -78,5 +96,14 @@ public class GameView : MonoBehaviour
         _view.color = _black;
         _animator.Color(_view, _black, _white, .3f, pDelay: 1f);
         _animator.Color(_text, _white, new Color(1, 1, 1, 0), _fadeOut, pDelay: 3f);
+    }
+
+    private void Warn()
+    {
+        _animator.Clear(_warning);
+        _animator.Whrite(_warning, _warningText, 2f);
+        _animator.Whrite(_warning, "", 0f, pDelay:5f);
+        _animator.Play();
+        _animator.Clear(_warning);
     }
 }

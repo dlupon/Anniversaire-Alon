@@ -5,40 +5,43 @@ using UnityEngine.UIElements;
 public class AnomalyHandeler : MonoBehaviour
 {
     // -------~~~~~~~~~~================# // Active
-    public bool IsActive => _activeAnomaly != null;
+    public bool IsActive => ActiveAnomaly != null;
 
     // -------~~~~~~~~~~================# // Anomaly
     private List<Anomaly> _anomalies = new List<Anomaly>();
-    private Anomaly _activeAnomaly;
+    public Anomaly ActiveAnomaly { get; private set; }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
     private void Start()
     {
         transform.GetComponentsInChildren(_anomalies);
         _anomalies.Sort(new RandomComparer());
+
+        foreach (Anomaly lAnomaly in _anomalies)
+            lAnomaly.Room = name;
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Behaviour
     public Anomaly Trigger()
     {
-        if (_anomalies.Count <= 0 || _activeAnomaly != null) return null;
+        if (_anomalies.Count <= 0 || ActiveAnomaly != null) return null;
 
-        _activeAnomaly = _anomalies[0];
-        _anomalies.Remove(_activeAnomaly);
+        ActiveAnomaly = _anomalies[0];
+        _anomalies.Remove(ActiveAnomaly);
 
-        _activeAnomaly.Trigger();
+        ActiveAnomaly.Trigger();
 
-        return _activeAnomaly;
+        return ActiveAnomaly;
     }
 
     public Anomaly Fix(string pAnomaly)
     {
-        if (_activeAnomaly == null || _activeAnomaly.Type != pAnomaly) return null;
+        if (ActiveAnomaly == null || ActiveAnomaly.Type != pAnomaly) return null;
 
-        Anomaly lFixedAnomaly = _activeAnomaly;
+        Anomaly lFixedAnomaly = ActiveAnomaly;
         lFixedAnomaly.Fix();
         _anomalies.Add(lFixedAnomaly);
-        _activeAnomaly = null;
+        ActiveAnomaly = null;
 
         return lFixedAnomaly;
     }

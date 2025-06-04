@@ -105,6 +105,20 @@ namespace UnBocal.TweeningSystem
             TweenExecutionHandler.StartUpdateTween();
         }
 
+        public void Play()
+        {
+            DoOnInterpolations(StartInterpolation);
+            TweenExecutionHandler.AddInterpolations(GetInterpolations());
+            TweenExecutionHandler.StartUpdateTween();
+        }
+
+        public void UnScalePlay()
+        {
+            DoOnInterpolations(UnScaleStartInterpolation);
+            TweenExecutionHandler.AddInterpolations(GetInterpolations());
+            TweenExecutionHandler.StartUpdateTween();
+        }
+
         #region // -------~~~~~~~~~~================# // Stop
         /// <summary>
         /// Stop all interpolations but DON'T complete them.
@@ -196,6 +210,8 @@ namespace UnBocal.TweeningSystem
 
         private void Complete(List<Interpolation> pInterpolations)
         {
+            if (pInterpolations == null) return;
+
             List<Interpolation> lInterpolations = pInterpolations;
             int lInterpolationCount = lInterpolations.Count;
 
@@ -247,6 +263,10 @@ namespace UnBocal.TweeningSystem
 		private void StartInterpolation(Interpolation pInterpolator) => pInterpolator.Start();
 
 		private void UnScaleStartInterpolation(Interpolation pInterpolator) => pInterpolator.UnScaleStart();
+
+		private void PlayInterpolation(Interpolation pInterpolator) => pInterpolator.Play();
+
+		private void UnScalePlayInterpolation(Interpolation pInterpolator) => pInterpolator.UnScalePlay();
 
         private List<Interpolation> GetInterpolations()
         {

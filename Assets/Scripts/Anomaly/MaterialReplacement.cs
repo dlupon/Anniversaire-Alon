@@ -53,10 +53,16 @@ public class MaterialReplacement : Anomaly
         base.Trigger();
 
         Material[] lTargetMaterials = GetMaterials();
+        Material lMaterial;
 
         _animator.StopAndClear();
         for (int lMaterialIndex = 0; lMaterialIndex < _materialCount; lMaterialIndex++)
-            _animator.Material(_target.materials[lMaterialIndex], _baseMaterials[lMaterialIndex], lTargetMaterials[lMaterialIndex], _duration, _ease);
+        {
+            lMaterial = _target.materials[lMaterialIndex];
+            lMaterial.mainTexture = lTargetMaterials[lMaterialIndex].mainTexture;
+            _animator.Material(lMaterial, _baseMaterials[lMaterialIndex], lTargetMaterials[lMaterialIndex], _duration, _ease);
+
+        }
         _animator.Start();
     }
 
@@ -66,5 +72,8 @@ public class MaterialReplacement : Anomaly
         base.Fix();
 
         _animator.Reset();
+
+        for (int lMaterialIndex = 0; lMaterialIndex < _materialCount; lMaterialIndex++)
+            _target.materials[lMaterialIndex].mainTexture = _baseMaterials[lMaterialIndex].mainTexture;
     }
 }

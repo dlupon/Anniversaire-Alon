@@ -57,6 +57,18 @@ namespace UnBocal.TweeningSystem.Interpolations
             else Update = UpdateInterpolationUnScaled;
         }
 
+        public void Play()
+        {
+            if (!IsFinished) return;
+            Start();
+        }
+
+        public void UnScalePlay()
+        {
+            if (!IsFinished) return;
+            UnScaleStart();
+        }
+
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Interpolation
         public Interpolation SetTimeScaleDependent(bool pTimeScaleDependent) { TimeScaleDependent = pTimeScaleDependent; return this; }
 

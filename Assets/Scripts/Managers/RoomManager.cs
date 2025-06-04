@@ -27,6 +27,7 @@ public class RoomManager : MonoBehaviour
     {
         EventBus.RoomInit -= _rooms.Add;
         EventBus.NeedChangeRoom -= ShowRoomIndexOffset;
+        EventBus.NeedChangeRoom -= ShowRoomIndexOffset;
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Room
