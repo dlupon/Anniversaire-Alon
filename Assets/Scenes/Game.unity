@@ -579,12 +579,32 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 5342292884743955497, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5342292884743955497, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5342292884743955497, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5342292884743955497, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5660788891645007107, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5660788891645007107, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5660788891645007107, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5660788891645007107, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
