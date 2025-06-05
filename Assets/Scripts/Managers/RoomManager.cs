@@ -27,7 +27,6 @@ public class RoomManager : MonoBehaviour
     {
         EventBus.RoomInit -= _rooms.Add;
         EventBus.NeedChangeRoom -= ShowRoomIndexOffset;
-        EventBus.NeedChangeRoom -= ShowRoomIndexOffset;
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Room
@@ -38,7 +37,7 @@ public class RoomManager : MonoBehaviour
         _rooms.Sort((Room pA, Room pB) => pA.transform.GetSiblingIndex().CompareTo(pB.transform.GetSiblingIndex()));
         EventBus.RoomListInit?.Invoke(_rooms);
 
-        Do(HideRoom);
+        // Do(HideRoom);
         ShowRoom(0);
 
         EventBus.Start?.Invoke();

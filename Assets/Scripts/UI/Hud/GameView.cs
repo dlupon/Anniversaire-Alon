@@ -98,8 +98,8 @@ public class GameView : MonoBehaviour
         _warningAnomator.CompleteAndClear();
 
         _warning.color = pColor;
-        _animator.Whrite(_warning, pMessage, 2f);
-        _animator.Whrite(_warning, "", 0f, pDelay: 2f +  pDuration);
-        _animator.Play();
+        _warningAnomator.Whrite(_warning, pMessage, 2f);
+        _warningAnomator.Whrite(_warning, "", 0f, pDelay: 2f +  pDuration);
+        _warningAnomator.Start();
     }
 }

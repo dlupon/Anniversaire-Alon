@@ -2,11 +2,17 @@ using System.Collections.Generic;
 using TMPro;
 using UnBocal.TweeningSystem;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
+    [SerializeField] private Image _background;
+    [SerializeField] private TextMeshProUGUI _gameOverText;
+
     [SerializeField] private Transform _anomalyContainer;
     [SerializeField] private TextMeshProUGUI _anomalyTextFactory;
+    private List<TextMeshProUGUI> _anomalies = new List<TextMeshProUGUI>();
 
     private Tween _animator = new Tween();
 
@@ -14,6 +20,12 @@ public class GameOver : MonoBehaviour
     {
         EventBus.GameOver += Show;
         EventBus.GameOverGetAnomalies += SetAnomalies;
+    }
+
+    private void OnDestroy()
+    {
+        EventBus.GameOver -= Show;
+        EventBus.GameOverGetAnomalies -= SetAnomalies;
     }
 
     private void Start()
@@ -24,6 +36,24 @@ public class GameOver : MonoBehaviour
     private void Show()
     {
         gameObject.SetActive(true);
+        
+        _animator.CompleteAndClear();
+        _animator.Color(_background, new Color(0, 0, 0, 0), Color.black, 1f);
+        _animator.Whrite(_gameOverText, 1f, pDelay: 1f);
+
+        foreach (TextMeshProUGUI lTextAnomaly in _anomalies)
+            ShowAnomaly(lTextAnomaly);
+
+        _animator.Start();
+
+        _gameOverText.text = "";
+    }
+
+    private void ShowAnomaly(TextMeshProUGUI pTextAnomaly)
+    {
+        _animator.Whrite(pTextAnomaly, 1f, pDelay: 1f + _anomalies.IndexOf(pTextAnomaly) * .5f).OnStarted += () => pTextAnomaly.gameObject.SetActive(true);
+        pTextAnomaly.text = "";
+        pTextAnomaly.gameObject.SetActive(false);
     }
 
     private void SetAnomalies(List<Anomaly> pAnomalies)
@@ -35,9 +65,15 @@ public class GameOver : MonoBehaviour
         for (int lAnomalyIndex = 0; lAnomalyIndex < lAnomalyCount; lAnomalyIndex++)
         {
             _anomalyTextFactory.text = $"{pAnomalies[lAnomalyIndex].Type} in {pAnomalies[lAnomalyIndex].Room}";
+            _anomalies.Add(_anomalyTextFactory);
 
             if (lAnomalyIndex >= lAnomalyCount - 1) break;
             _anomalyTextFactory = Instantiate(_anomalyTextFactory, _anomalyContainer);
         }
+    }
+
+    public void Exit()
+    {
+        SceneManager.LoadScene("Main");
     }
 }

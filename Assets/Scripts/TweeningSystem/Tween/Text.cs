@@ -11,7 +11,12 @@ namespace UnBocal.TweeningSystem
     public partial class Tween
     {
         private string GetText(Object pTarget)
-        => pTarget switch { Text lText => lText.text, TextMesh lTextMesh => lTextMesh.text, _ => "" };
+        => pTarget switch
+        { 
+            Text lText => lText.text,
+            TextMesh lTextMesh => lTextMesh.text,
+            TMP_Text TMP_Text => TMP_Text.text,
+            _ => "" };
 
         public Interpolation Whrite(Object pTarget, float pDuration, EaseType pEasing = EaseType.Flat, float pDelay = 0f, Ref pRef = Ref.Global)
             => Whrite(pTarget, GetText(pTarget), pDuration, EaseFunction.GetFunction(pEasing), pDelay, pRef);

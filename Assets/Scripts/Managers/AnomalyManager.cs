@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
@@ -32,23 +33,25 @@ public class AnomalyManager : MonoBehaviour
     private bool _warned = false;
     private Coroutine _coroutine;
 
-    private bool _tooManyAnomalies => _anomalies.Count >= _maxAnomalyCount || _rooms.Count <= 0;
+    private bool _tooManyAnomalies => _anomalies.Count >= _maxAnomalyCount || (_rooms.Count <= 0 && _disabledRooms.Count <= 0);
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
     private void Awake()
     {
         EventBus.RoomListInit += SetRooms;
-        EventBus.Start += StartAnomalies;
+        EventBus.Start += StartLooping;
         EventBus.RoomChanged += UpdateRoom;
         EventBus.ReportAnomaly += TryFix;
+        EventBus.TimeEnded += StopLooping;
     }
 
     private void OnDestroy()
     {
         EventBus.RoomListInit -= SetRooms;
-        EventBus.Start -= StartAnomalies;
+        EventBus.Start -= StartLooping;
         EventBus.RoomChanged -= UpdateRoom;
         EventBus.ReportAnomaly -= TryFix;
+        EventBus.TimeEnded -= StopLooping;
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Room
@@ -57,10 +60,20 @@ public class AnomalyManager : MonoBehaviour
     private void UpdateRoom(Room pNewRoom) => _currentRoom = pNewRoom;
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Anomalies
-    private void StartAnomalies()
+    private void StartLooping()
     {
+        Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Start Looping");
+
         _isActive = true;
         _coroutine = StartCoroutine(LoopAnomalies());
+    }
+
+    private void StopLooping()
+    {
+        Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Stop Looping");
+
+        StopCoroutine(_coroutine);
+        _coroutine = null;
     }
 
     // -------~~~~~~~~~~================# // Looping
@@ -165,10 +178,12 @@ public class AnomalyManager : MonoBehaviour
         if (_tooManyAnomalies)
         {
             Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Wait For Checking Game Over / Warning");
-            yield return new WaitForSeconds(_warned ? _timeBeforeDeath : _timeBeforeWarning);
+            yield return new WaitForSeconds(_timeBeforeWarning);
             yield return new WaitUntil(() => !_isSearching);
-            CheckGameOver();
-            TryWarn();
+            if (_tooManyAnomalies) Warn();
+            yield return new WaitForSeconds(_timeBeforeDeath);
+            yield return new WaitUntil(() => !_isSearching);
+            if (_tooManyAnomalies) CheckGameOver();
         }
 
     }
@@ -186,7 +201,7 @@ public class AnomalyManager : MonoBehaviour
         foreach (Room lRoom in _activeRooms)
             lAnomalies.Add(lRoom.AnomalyHandeler.ActiveAnomaly);
 
-        StopCoroutine(_coroutine);
+        StopLooping();
 
         EventBus.GameOverGetAnomalies?.Invoke(lAnomalies);
         EventBus.GameOver?.Invoke();

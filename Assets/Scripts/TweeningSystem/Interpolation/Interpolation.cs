@@ -9,6 +9,7 @@ namespace UnBocal.TweeningSystem.Interpolations
     public class Interpolation
     {
         // -------~~~~~~~~~~================# // Events
+        public Action OnStarted;
         public Action OnFinished;
 
         // -------~~~~~~~~~~================# // Time
@@ -44,8 +45,8 @@ namespace UnBocal.TweeningSystem.Interpolations
             StartTime = (TimeScaleDependent ? Time.time : Time.unscaledTime) + Delay;
             EndTime = StartTime + Duration;
 
-            if (Delay > 0) Update = TimeScaleDependent ? UpdateWait : UpdateWaitUnScaled;
-            else Update = TimeScaleDependent ? UpdateInterpolation : UpdateInterpolationUnScaled;
+            if (Delay > 0) StartInterpolate(TimeScaleDependent);
+            else StartWait(TimeScaleDependent);
         }
 
         public void UnScaleStart()
@@ -53,8 +54,8 @@ namespace UnBocal.TweeningSystem.Interpolations
             StartTime = Time.unscaledTime + Delay;
             EndTime = StartTime + Duration;
 
-            if (Delay > 0) Update = UpdateWaitUnScaled;
-            else Update = UpdateInterpolationUnScaled;
+            if (Delay > 0) StartInterpolate(false);
+            else StartWait(false);
         }
 
         public void Play()
@@ -72,7 +73,18 @@ namespace UnBocal.TweeningSystem.Interpolations
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Interpolation
         public Interpolation SetTimeScaleDependent(bool pTimeScaleDependent) { TimeScaleDependent = pTimeScaleDependent; return this; }
 
-        public void Complete()
+        public void StartWait(bool pScaled)
+        {
+            Update = pScaled ? UpdateInterpolation : UpdateInterpolationUnScaled;
+        }
+
+        public void StartInterpolate(bool pScaled)
+        {
+            Update = pScaled ? UpdateWait : UpdateWaitUnScaled;
+            OnStarted?.Invoke();
+        }
+
+        public void CompleteInterpate()
         {
             Update = null;
             InterpolationMethod?.Invoke(1);
@@ -89,7 +101,7 @@ namespace UnBocal.TweeningSystem.Interpolations
         private void UpdateInterpolation()
         {
             if (target.IsNull()) Update = null;
-            else if (Ratio >= 1) Complete();
+            else if (Ratio >= 1) CompleteInterpate();
             else InterpolationMethod?.Invoke(Ratio);
         }
 
@@ -103,7 +115,7 @@ namespace UnBocal.TweeningSystem.Interpolations
         private void UpdateInterpolationUnScaled()
         {
             if (target.IsNull()) Update = null;
-            else if (UnscaleRatio >= 1) Complete();
+            else if (UnscaleRatio >= 1) CompleteInterpate();
             else InterpolationMethod?.Invoke(UnscaleRatio);
         }
     }

@@ -324,13 +324,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab4301fd77881d4488b9eaf1b11fc48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startCooldown: 0
-  _baseCooldown: 10
-  _maxCooldownOffset: 5
+  _startCooldown: 45
+  _baseCooldown: 28
+  _maxCooldownOffset: 10
   _maxAnomalyCount: 3
-  _reportCooldDown: 5
+  _reportCooldDown: 3
   _timeBeforeWarning: 5
-  _timeBeforeDeath: 5
+  _timeBeforeDeath: 30
 --- !u!114 &1342992129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hourCount: 6
-  _maxTimeInMinutes: 20
+  _maxTimeInMinutes: 10
 --- !u!1001 &1380296740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -355,7 +355,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1738641298047544184, guid: bd5071cf0bff12e4892337c4a290b5b7, type: 3}
       propertyPath: m_Name
-      value: Cuisine
+      value: Kitchen
       objectReference: {fileID: 0}
     - target: {fileID: 2238260275922436498, guid: bd5071cf0bff12e4892337c4a290b5b7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -417,7 +417,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1738641298047544184, guid: f31a53641c60593418921268c56bbccb, type: 3}
       propertyPath: m_Name
-      value: Chambre
+      value: Bedroom
       objectReference: {fileID: 0}
     - target: {fileID: 2238260275922436498, guid: f31a53641c60593418921268c56bbccb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -575,25 +575,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1746337035}
     m_Modifications:
+    - target: {fileID: 92579107504997816, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
+      propertyPath: m_text
+      value: Report
+      objectReference: {fileID: 0}
     - target: {fileID: 3098040423180125908, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
       propertyPath: m_Name
       value: HUD
-      objectReference: {fileID: 0}
-    - target: {fileID: 5342292884743955497, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5342292884743955497, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
-      propertyPath: m_fontColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5342292884743955497, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
-      propertyPath: m_fontColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5342292884743955497, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
-      propertyPath: m_fontColor.r
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5660788891645007107, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
       propertyPath: m_AnchorMax.x

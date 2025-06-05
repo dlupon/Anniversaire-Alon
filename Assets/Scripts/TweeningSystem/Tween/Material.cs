@@ -3,9 +3,6 @@
 
 using UnityEngine;
 using UnBocal.TweeningSystem.Interpolations;
-using UnityEngine.UI;
-using TMPro;
-using TreeEditor;
 
 namespace UnBocal.TweeningSystem
 {

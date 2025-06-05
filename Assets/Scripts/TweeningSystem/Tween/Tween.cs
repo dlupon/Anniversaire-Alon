@@ -219,7 +219,7 @@ namespace UnBocal.TweeningSystem
             for (int lCurrentInterpolationIndex = lInterpolationCount - 1; lCurrentInterpolationIndex >= 0; lCurrentInterpolationIndex--)
             {
                 lCurrentInterpolation = lInterpolations[lCurrentInterpolationIndex];
-                lCurrentInterpolation.Complete();
+                lCurrentInterpolation.CompleteInterpate();
             }
 
             Stop();

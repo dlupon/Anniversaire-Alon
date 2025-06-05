@@ -34,6 +34,28 @@ public static class EventBus
     public static Action<int, int> TimeUpdated;
     public static Action<int> TimeNewHour;
     public static Action TimeEnded;
+
+    public static void Reset()
+    {
+        RoomInit = null;
+        RoomListInit = null;
+        Start = null;
+        GameOver = null;
+        GameOverGetAnomalies = null;
+        NeedChangeRoom = null;
+        NeedCameraFade = null;
+        CameraFadeMid = null;
+        RoomChanged = null;
+        Report = null;
+        ReportAnomaly = null;
+        CheckAnomalyDone = null;
+        AnomalyFixed = null;
+        AnomalyNotFounded = null;
+        TooManyAnomalies = null;
+        Warn = null;
+        TimeUpdated = null;
+        TimeEnded = null;
+    }
 }
 
 public class RandomComparer : IComparer<object>
