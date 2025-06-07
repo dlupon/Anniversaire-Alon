@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-
 public static class EventBus
 {
     // -------~~~~~~~~~~================# // Initialization
@@ -59,6 +57,12 @@ public static class EventBus
         TimeEnded = null;
         StopTime = null;
     }
+}
+
+public static class GlobalVariables
+{
+    public static int LetterCount = 3;
+    public static int LetterDiscovered = 0;
 }
 
 public class RandomComparer : IComparer<object>

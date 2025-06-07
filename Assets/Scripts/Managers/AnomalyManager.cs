@@ -107,36 +107,43 @@ public class AnomalyManager : MonoBehaviour
         int lRandomIndex = Random.Range(0, _rooms.Count);
         int lRoomIndex = 0;
         Room lRoom;
-        Anomaly lNewAnomaly;
 
         do
         {
             if (_rooms.Count <= 0) break;
 
             lRoom = _rooms[(lRandomIndex - lRoomIndex + _rooms.Count) % _rooms.Count];
-            lNewAnomaly = lRoom.AnomalyHandeler.Trigger(_currentHeartCooldown == 0);
 
-            Debug.Log(_currentHeartCooldown == 0);
-
-            if (lNewAnomaly == null)
-            {
-                _rooms.Remove(lRoom);
-                continue;
-            }
-
-            _anomalies.Add(lNewAnomaly);
-            _rooms.Remove(lRoom);
-            _activeRooms.Add(lRoom);
-
-            EventBus.GetAnomalyHandeler?.Invoke(_currentRoom.AnomalyHandeler);
-
-            if (--_currentHeartCooldown < 0) _currentHeartCooldown = Random.Range(_heartMinMaxCooldDown.x, _heartMinMaxCooldDown.y);
-
-            Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : New Anomaly Successfully Triggered");
+            if (TriggerIfNotNull(lRoom)) return;
 
         } while (++lRoomIndex < _rooms.Count);
 
         Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Can't Trigger Anomaly");
+    }
+
+    private bool TriggerIfNotNull(Room pRoom)
+    {
+        Anomaly lNewAnomaly = pRoom.AnomalyHandeler.Trigger(_currentHeartCooldown == 0);
+
+        if (lNewAnomaly == null)
+        {
+            _rooms.Remove(pRoom);
+            return false;
+        }
+
+        _anomalies.Add(lNewAnomaly);
+        _rooms.Remove(pRoom);
+        _activeRooms.Add(pRoom);
+
+        EventBus.GetAnomalyHandeler?.Invoke(_currentRoom.AnomalyHandeler);
+
+        Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : New Anomaly Successfully Triggered");
+
+        if (PlayerPrefs.GetInt(nameof(Heart), 0) >= GlobalVariables.LetterCount) return true;
+
+        if (--_currentHeartCooldown < 0) _currentHeartCooldown = Random.Range(_heartMinMaxCooldDown.x, _heartMinMaxCooldDown.y);
+
+        return true;
     }
 
     private void EnableNextRoom()

@@ -64,12 +64,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startCooldown: 45
   _baseCooldown: 25
-  _maxCooldownOffset: 10
+  _maxCooldownOffset: 5
   _maxAnomalyCount: 3
   _reportCooldDown: 3
   _timeBeforeWarning: 5
   _timeBeforeDeath: 30
-  _heartMinMaxCooldDown: {x: 5, y: 7}
+  _heartMinMaxCooldDown: {x: 4, y: 7}
 --- !u!114 &213645473143919226
 MonoBehaviour:
   m_ObjectHideFlags: 0

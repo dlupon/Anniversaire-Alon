@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnBocal.TweeningSystem;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -62,9 +65,15 @@ public class GameOver : MonoBehaviour
 
         if (lAnomalyCount <= 0) return;
 
+
+        string[] lAnomaliesType = Enum.GetNames(typeof(Anomaly));
+        string lType;
+
         for (int lAnomalyIndex = 0; lAnomalyIndex < lAnomalyCount; lAnomalyIndex++)
         {
-            _anomalyTextFactory.text = $"{pAnomalies[lAnomalyIndex].Type} in {pAnomalies[lAnomalyIndex].Room}";
+            lType = lAnomaliesType.Contains(pAnomalies[lAnomalyIndex].Type) ? pAnomalies[lAnomalyIndex].Type : "???";
+
+            _anomalyTextFactory.text = $"{lType} in {pAnomalies[lAnomalyIndex].Room}";
             _anomalies.Add(_anomalyTextFactory);
 
             if (lAnomalyIndex >= lAnomalyCount - 1) break;

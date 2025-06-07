@@ -29,6 +29,8 @@ public class Colliction : MonoBehaviour
     {
         _letterContainer.GetComponentsInChildren(_letters);
 
+        GlobalVariables.LetterCount = _letters.Count;
+
         foreach (Letter lLetter in _letters) CreateButtonAndHide(lLetter);
 
         Hide();
@@ -43,7 +45,9 @@ public class Colliction : MonoBehaviour
         lNewButton.onClick.AddListener(pLetter.Show);
 
         if (_letters.IndexOf(pLetter) < PlayerPrefs.GetInt(nameof(Heart), 0))
+        {
             lButtonText.text = pLetter.name;
+        }
         else
         {
             lButtonText.text = "???";
