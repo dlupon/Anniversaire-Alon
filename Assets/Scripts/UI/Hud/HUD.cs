@@ -18,6 +18,7 @@ public class HUD : MonoBehaviour
     private string _defaultPage;
 
     // -------~~~~~~~~~~================# // Animation
+    [SerializeField] private CanvasGroup _transition;
     private Tween _textAnimator = new Tween();
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
@@ -39,6 +40,10 @@ public class HUD : MonoBehaviour
 
     private void Start()
     {
+        Tween lAnimator = new Tween();
+        lAnimator.Interpolate<float>(_transition, (x) => _transition.alpha = x, 0f, 1f, 1f);
+        lAnimator.Start();
+
         if (_pageContainer.childCount > 0)
         {
             _defaultPage = _pageContainer.GetChild(0).name;

@@ -33,6 +33,11 @@ public class AnomalyManager : MonoBehaviour
     private bool _warned = false;
     private Coroutine _coroutine;
 
+    // -------~~~~~~~~~~================# // Anomalies
+    [Header("Heart")]
+    [SerializeField] private Vector2Int _heartMinMaxCooldDown = new Vector2Int(5, 7);
+    private int _currentHeartCooldown = -1;
+
     private bool _tooManyAnomalies => _anomalies.Count >= _maxAnomalyCount || (_rooms.Count <= 0 && _disabledRooms.Count <= 0);
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
@@ -57,7 +62,11 @@ public class AnomalyManager : MonoBehaviour
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Room
     private void SetRooms(List<Room> pRooms) => _rooms = pRooms.ToList();
 
-    private void UpdateRoom(Room pNewRoom) => _currentRoom = pNewRoom;
+    private void UpdateRoom(Room pNewRoom)
+    {
+        _currentRoom = pNewRoom;
+        EventBus.GetAnomalyHandeler?.Invoke(_currentRoom.AnomalyHandeler);
+    }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Anomalies
     private void StartLooping()
@@ -105,7 +114,9 @@ public class AnomalyManager : MonoBehaviour
             if (_rooms.Count <= 0) break;
 
             lRoom = _rooms[(lRandomIndex - lRoomIndex + _rooms.Count) % _rooms.Count];
-            lNewAnomaly = lRoom.AnomalyHandeler.Trigger();
+            lNewAnomaly = lRoom.AnomalyHandeler.Trigger(_currentHeartCooldown == 0);
+
+            Debug.Log(_currentHeartCooldown == 0);
 
             if (lNewAnomaly == null)
             {
@@ -116,16 +127,16 @@ public class AnomalyManager : MonoBehaviour
             _anomalies.Add(lNewAnomaly);
             _rooms.Remove(lRoom);
             _activeRooms.Add(lRoom);
-            
-            Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : New Anomaly Successfully Triggered");
 
-            return;
+            EventBus.GetAnomalyHandeler?.Invoke(_currentRoom.AnomalyHandeler);
+
+            if (--_currentHeartCooldown < 0) _currentHeartCooldown = Random.Range(_heartMinMaxCooldDown.x, _heartMinMaxCooldDown.y);
+
+            Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : New Anomaly Successfully Triggered");
 
         } while (++lRoomIndex < _rooms.Count);
 
         Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Can't Trigger Anomaly");
-
-        return;
     }
 
     private void EnableNextRoom()
@@ -185,7 +196,6 @@ public class AnomalyManager : MonoBehaviour
             yield return new WaitUntil(() => !_isSearching);
             if (_tooManyAnomalies) CheckGameOver();
         }
-
     }
 
     private void CheckGameOver()
@@ -203,6 +213,7 @@ public class AnomalyManager : MonoBehaviour
 
         StopLooping();
 
+        EventBus.StopTime?.Invoke();
         EventBus.GameOverGetAnomalies?.Invoke(lAnomalies);
         EventBus.GameOver?.Invoke();
     }

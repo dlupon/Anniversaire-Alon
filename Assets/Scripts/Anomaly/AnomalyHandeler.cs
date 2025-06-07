@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class AnomalyHandeler : MonoBehaviour
 {
@@ -9,25 +8,54 @@ public class AnomalyHandeler : MonoBehaviour
 
     // -------~~~~~~~~~~================# // Anomaly
     private List<Anomaly> _anomalies = new List<Anomaly>();
+    private List<Anomaly> _heart = new List<Anomaly>();
     public Anomaly ActiveAnomaly { get; private set; }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
     private void Start()
     {
+        GetAnomalies();
+    }
+
+    // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Anomaly
+    private void GetAnomalies()
+    {
         transform.GetComponentsInChildren(_anomalies);
         _anomalies.Sort(new RandomComparer());
 
-        foreach (Anomaly lAnomaly in _anomalies)
-            lAnomaly.Room = name;
+        foreach (Anomaly lAnomalyOrHeart in _anomalies)
+            lAnomalyOrHeart.Room = name;
+        
+        Anomaly lAnomaly;
+
+        for (int lAnomalyIndex = _anomalies.Count - 1; lAnomalyIndex  >= 0; lAnomalyIndex--)
+        {
+            lAnomaly = _anomalies[lAnomalyIndex];
+
+            if (lAnomaly.Type != nameof(Heart)) continue;
+
+            _anomalies.Remove(lAnomaly);
+            _heart.Add(lAnomaly);
+        }
     }
 
-    // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Behaviour
-    public Anomaly Trigger()
-    {
-        if (_anomalies.Count <= 0 || ActiveAnomaly != null) return null;
+    public string GetAnomaly() => ActiveAnomaly == null ? "None" : ActiveAnomaly.Type;
 
-        ActiveAnomaly = _anomalies[0];
-        _anomalies.Remove(ActiveAnomaly);
+    // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Behaviour
+    public Anomaly Trigger(bool pHeart = false)
+    {
+        if (pHeart && _heart.Count > 0)
+        {
+            ActiveAnomaly = _heart[0];
+            _heart.Remove(ActiveAnomaly);
+        }
+        else
+        {
+            ActiveAnomaly = _anomalies[0];
+            _anomalies.Remove(ActiveAnomaly);
+
+            if (_anomalies.Count <= 0) return null;
+        }
 
         ActiveAnomaly.Trigger();
 
@@ -39,9 +67,12 @@ public class AnomalyHandeler : MonoBehaviour
         if (ActiveAnomaly == null || ActiveAnomaly.Type != pAnomaly) return null;
 
         Anomaly lFixedAnomaly = ActiveAnomaly;
-        lFixedAnomaly.Fix();
-        _anomalies.Add(lFixedAnomaly);
         ActiveAnomaly = null;
+
+        lFixedAnomaly.Fix();
+
+        if (lFixedAnomaly.Type != nameof(Heart)) _anomalies.Add(lFixedAnomaly);
+        else _heart.Add(lFixedAnomaly);
 
         return lFixedAnomaly;
     }

@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea304aaa59572a642bae9da88efebcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
 --- !u!1 &3211901065777498517
 GameObject:
@@ -424,6 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a394959eb1bfc8d4797a16d14c8b2444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
   _duration: 1
   _targetIntencity: 0
@@ -822,6 +824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4d9926716cae944b596397a4346ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
   _targetAxis: {fileID: 0}
   _rotationDuration: 2
@@ -967,6 +970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ddbac7fe472e44c82fbad76e32d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
   _pointContainer: {fileID: 4822193792919240586}
 --- !u!4 &666866982319076674 stripped
@@ -1186,6 +1190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ddbac7fe472e44c82fbad76e32d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
   _pointContainer: {fileID: 6407687626812595272}
 --- !u!1001 &1784875986278333075
@@ -1456,6 +1461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65c98dc56f385f45a8d14d20b6cf288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
 --- !u!1001 &3086354718723194870
 PrefabInstance:
@@ -1644,6 +1650,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3596449255843944160, guid: 23ea946da7e8a604e9627d89cc918b74, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6524064484642394792}
+    - targetCorrespondingSourceObject: {fileID: 3596449255843944160, guid: 23ea946da7e8a604e9627d89cc918b74, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3553197053686887330}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23ea946da7e8a604e9627d89cc918b74, type: 3}
 --- !u!4 &2238260275922436498 stripped
@@ -2019,6 +2028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65c98dc56f385f45a8d14d20b6cf288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
 --- !u!4 &5713071351688605310 stripped
 Transform:
@@ -2239,6 +2249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea304aaa59572a642bae9da88efebcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
 --- !u!1001 &6475104570896685837
 PrefabInstance:
@@ -2390,6 +2401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ddbac7fe472e44c82fbad76e32d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
   _pointContainer: {fileID: 1861065587913722283}
 --- !u!4 &6704231867181115058 stripped
@@ -2529,6 +2541,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4fd67864d505e6943a6f1c94bcc32a14, type: 3}
   m_PrefabInstance: {fileID: 6745741955467575591}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7304480314035771141
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2238260275922436498}
+    m_Modifications:
+    - target: {fileID: 6057842601692177575, guid: 1114b7a8ed0538b4abf90dd454fada59, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057842601692177575, guid: 1114b7a8ed0538b4abf90dd454fada59, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057842601692177575, guid: 1114b7a8ed0538b4abf90dd454fada59, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057842601692177575, guid: 1114b7a8ed0538b4abf90dd454fada59, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057842601692177575, guid: 1114b7a8ed0538b4abf90dd454fada59, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057842601692177575, guid: 1114b7a8ed0538b4abf90dd454fada59, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.000000014901159
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057842601692177575, guid: 1114b7a8ed0538b4abf90dd454fada59, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057842601692177575, guid: 1114b7a8ed0538b4abf90dd454fada59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057842601692177575, guid: 1114b7a8ed0538b4abf90dd454fada59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057842601692177575, guid: 1114b7a8ed0538b4abf90dd454fada59, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437383117408284429, guid: 1114b7a8ed0538b4abf90dd454fada59, type: 3}
+      propertyPath: m_Name
+      value: SpiningHeart
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1114b7a8ed0538b4abf90dd454fada59, type: 3}
+--- !u!4 &3553197053686887330 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6057842601692177575, guid: 1114b7a8ed0538b4abf90dd454fada59, type: 3}
+  m_PrefabInstance: {fileID: 7304480314035771141}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7533831248480459544
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2606,6 +2680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65c98dc56f385f45a8d14d20b6cf288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
 --- !u!4 &8000419233950809331 stripped
 Transform:
@@ -2759,6 +2834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea304aaa59572a642bae9da88efebcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
 --- !u!4 &7932745056278683382 stripped
 Transform:
@@ -2889,6 +2965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ddbac7fe472e44c82fbad76e32d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
   _pointContainer: {fileID: 4570413441454014720}
 --- !u!1 &3436469699649047765 stripped
@@ -2908,6 +2985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ddbac7fe472e44c82fbad76e32d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
   _pointContainer: {fileID: 4711199664690300671}
 --- !u!4 &4339084447161945736 stripped
@@ -2937,6 +3015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ddbac7fe472e44c82fbad76e32d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
   _pointContainer: {fileID: 7840501232584986904}
 --- !u!1 &7130763515005956642 stripped
@@ -2956,6 +3035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ddbac7fe472e44c82fbad76e32d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
   _pointContainer: {fileID: 880373024496975052}
 --- !u!4 &7714805901835814368 stripped
@@ -3293,6 +3373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65c98dc56f385f45a8d14d20b6cf288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
 --- !u!1001 &8607994682088524515
 PrefabInstance:
@@ -3384,6 +3465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65c98dc56f385f45a8d14d20b6cf288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
 --- !u!1001 &8627627513302360745
 PrefabInstance:
@@ -3598,6 +3680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4d9926716cae944b596397a4346ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
   _targetAxis: {fileID: 4487699720776205905}
   _rotationDuration: 1
@@ -3613,6 +3696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ddbac7fe472e44c82fbad76e32d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _target: {fileID: 0}
   _pointContainer: {fileID: 6523201156105661985}
 --- !u!4 &8990454018293416167 stripped
@@ -3703,6 +3787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4754c43f56e90504698d9b151d706d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Room: 
   _isCustomType: 0
   _customType: Custom
   _type: 2

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TimeManager : MonoBehaviour
@@ -10,34 +11,50 @@ public class TimeManager : MonoBehaviour
     private float _hourLength;
     private float _minuteLength;
 
-    private int CurrentHour;
-    private int CurrentMinute;
+    private Coroutine _coroutine;
+    private int _currentHour;
+    private int _currentMinute;
+
+    private void Awake()
+    {
+        EventBus.StopTime += StopTime;
+    }
+
+    private void OnDestroy()
+    {
+        EventBus.StopTime -= StopTime;
+    }
 
     private void Start()
     {
         _hourLength = _maxTimeInMinutes * MAX_MINUTE / ((float)_hourCount);
         _minuteLength = _hourLength / MAX_MINUTE;
 
-        StartCoroutine(LoopTime());
+        StartTime();
     }
+
+    private void StartTime() => _coroutine = StartCoroutine(LoopTime());
+
+    private void StopTime() => StopCoroutine(_coroutine);
 
     private IEnumerator LoopTime()
     {
-        while (CurrentHour < _hourCount)
+        while (_currentHour < _hourCount)
         {
-            EventBus.TimeUpdated?.Invoke(CurrentHour, CurrentMinute);
+            EventBus.TimeUpdated?.Invoke(_currentHour, _currentMinute);
             yield return new WaitForSeconds(_minuteLength);
 
-            if (++CurrentMinute >= MAX_MINUTE)
+            if (++_currentMinute >= MAX_MINUTE)
             {
-                CurrentMinute = 0;
-                CurrentHour++;
+                _currentMinute = 0;
+                _currentHour++;
 
-                EventBus.TimeNewHour?.Invoke(CurrentHour);
+                EventBus.TimeNewHour?.Invoke(_currentHour);
             }
         }
 
-        EventBus.TimeUpdated?.Invoke(CurrentHour, CurrentMinute);
+        EventBus.TimeUpdated?.Invoke(_currentHour, _currentMinute);
         EventBus.TimeEnded?.Invoke();
     }
+
 }

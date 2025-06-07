@@ -37,9 +37,6 @@ namespace UnBocal.TweeningSystem.Interpolations
         public Interpolation() => Update = null;
 
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Time
-        /// <summary>
-        /// Reset time so the Ratio is at the right place.
-        /// </summary>
         public void Start()
         {
             StartTime = (TimeScaleDependent ? Time.time : Time.unscaledTime) + Delay;

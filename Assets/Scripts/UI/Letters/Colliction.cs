@@ -41,7 +41,14 @@ public class Colliction : MonoBehaviour
 
         lNewButton.name = pLetter.name;
         lNewButton.onClick.AddListener(pLetter.Show);
-        lButtonText.text = pLetter.name;
+
+        if (_letters.IndexOf(pLetter) < PlayerPrefs.GetInt(nameof(Heart), 0))
+            lButtonText.text = pLetter.name;
+        else
+        {
+            lButtonText.text = "???";
+            lNewButton.enabled = false;
+        }
         _buttonsText.Add(lButtonText);
 
         pLetter.gameObject.SetActive(false);

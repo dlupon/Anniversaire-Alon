@@ -26,6 +26,7 @@ public static class EventBus
     public static Action AnomalyFixed;
     public static Action AnomalyNotFounded;
     public static Action TooManyAnomalies;
+    public static Action<AnomalyHandeler> GetAnomalyHandeler;
 
     // -------~~~~~~~~~~================# // Warning
     public static Action<string, float, UnityEngine.Color> Warn;
@@ -34,6 +35,7 @@ public static class EventBus
     public static Action<int, int> TimeUpdated;
     public static Action<int> TimeNewHour;
     public static Action TimeEnded;
+    public static Action StopTime;
 
     public static void Reset()
     {
@@ -55,6 +57,7 @@ public static class EventBus
         Warn = null;
         TimeUpdated = null;
         TimeEnded = null;
+        StopTime = null;
     }
 }
 

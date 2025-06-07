@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using TMPro;
 using UnBocal.TweeningSystem;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class ReportSystem : MonoBehaviour
     [SerializeField] private GameObject _inputBlock;
 
     // -------~~~~~~~~~~================# // Input
+    private Button _additionnalButton;
     private bool _isInputReactive = true;
 
     // -------~~~~~~~~~~================# // Animations
@@ -21,16 +23,18 @@ public class ReportSystem : MonoBehaviour
     private void Awake()
     {
         EventBus.CheckAnomalyDone += EnableInput;
+        EventBus.GetAnomalyHandeler += UpdateAnomalies;
     }
 
     private void OnDestroy()
     {
         EventBus.CheckAnomalyDone -= EnableInput;
+        EventBus.GetAnomalyHandeler -= UpdateAnomalies;
     }
 
     private void Start()
     {
-        UpdateAnomalies();
+        CreateButtons();
         EnableInput();
     }
 
@@ -39,20 +43,40 @@ public class ReportSystem : MonoBehaviour
         PlayFadeAnimation();
     }
 
+    // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Anomalies
+    private void UpdateAnomalies(AnomalyHandeler pAnomalyHandeler)
+    {
+        Anomaly lCurrentAnomaly = pAnomalyHandeler.ActiveAnomaly;
+
+        bool pEnable = lCurrentAnomaly != null && !Enum.GetNames(typeof(AnomalyType)).Contains(lCurrentAnomaly.Type) ?
+            lCurrentAnomaly.Type != "None" : false;
+
+        if (pEnable) _additionnalButton = CreateButton(_additionnalButton, lCurrentAnomaly.Type);
+
+        _additionnalButton?.gameObject.SetActive(pEnable);
+    }
+
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Buttons
-    private void UpdateAnomalies()
+    private void CreateButtons()
     {
         string[] lAllNames = Enum.GetNames(typeof(AnomalyType));
 
         foreach (string lName in lAllNames)
             CreateButton(lName);
+
+        _additionnalButton = CreateButton("None");
+        _additionnalButton.gameObject.SetActive(false);
     }
 
-    private void CreateButton(string pName)
+    private Button CreateButton(string pName = "None") => CreateButton(Instantiate(_buttonFactory, _buttonContainer), pName);
+
+    private Button CreateButton(Button pButton, string pName)
     {
-        Button lCurrentButton = Instantiate(_buttonFactory, _buttonContainer);
-        lCurrentButton.GetComponentInChildren<TextMeshProUGUI>().text = lCurrentButton.name = pName;
-        lCurrentButton.onClick.AddListener(() => Report(pName));
+        pButton.GetComponentInChildren<TextMeshProUGUI>().text = pButton.name = pName;
+        pButton.onClick.RemoveAllListeners();
+        pButton.onClick.AddListener(() => Report(pName));
+
+        return pButton;
     }
 
 
