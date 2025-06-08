@@ -51,10 +51,11 @@ public class AnomalyHandeler : MonoBehaviour
         }
         else
         {
+            if (_anomalies.Count <= 0) return null;
+
             ActiveAnomaly = _anomalies[0];
             _anomalies.Remove(ActiveAnomaly);
 
-            if (_anomalies.Count <= 0) return null;
         }
 
         ActiveAnomaly.Trigger();

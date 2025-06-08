@@ -39,8 +39,7 @@ public class Settings : MonoBehaviour
         // gameObject.SetActive(true);
         _backGround.enabled = true;
 
-        _animator.CompleteAndClear();
-        Tween.KillAndClear( _animator );
+        _animator.StopAndClear();
 
         _animator.Scale(_container, 1, _showDuration, EaseType.OutExpo);
         _animator.Start();
@@ -50,8 +49,7 @@ public class Settings : MonoBehaviour
     {
         _backGround.enabled = false;
 
-        _animator.CompleteAndClear();
-        Tween.KillAndClear(_animator);
+        _animator.StopAndClear();
 
         _animator.Scale(_container, 0, _showDuration, EaseType.OutExpo);
         _animator.Start();

@@ -125,6 +125,8 @@ public class AnomalyManager : MonoBehaviour
     {
         Anomaly lNewAnomaly = pRoom.AnomalyHandeler.Trigger(_currentHeartCooldown == 0);
 
+        Debug.Log(lNewAnomaly == null);
+
         if (lNewAnomaly == null)
         {
             _rooms.Remove(pRoom);
