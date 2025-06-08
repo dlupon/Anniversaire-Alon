@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 369b9ebe3a62b904dbc19bd332b44086, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -225,7 +225,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1738641298047544184, guid: f31a53641c60593418921268c56bbccb, type: 3}
       propertyPath: m_Name
-      value: Chambre
+      value: Bedroom
       objectReference: {fileID: 0}
     - target: {fileID: 2238260275922436498, guid: f31a53641c60593418921268c56bbccb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -385,7 +385,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1738641298047544184, guid: f991c67a74097d647971c8f1a5b8f148, type: 3}
       propertyPath: m_Name
-      value: Salon
+      value: Living Room
       objectReference: {fileID: 0}
     - target: {fileID: 2238260275922436498, guid: f991c67a74097d647971c8f1a5b8f148, type: 3}
       propertyPath: m_LocalPosition.x
@@ -442,7 +442,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1738641298047544184, guid: bd5071cf0bff12e4892337c4a290b5b7, type: 3}
       propertyPath: m_Name
-      value: Cuisine
+      value: Kitchen
       objectReference: {fileID: 0}
     - target: {fileID: 2238260275922436498, guid: bd5071cf0bff12e4892337c4a290b5b7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -500,6 +500,10 @@ PrefabInstance:
     - target: {fileID: 3098040423180125908, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 5342292884743955497, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5660788891645007107, guid: 5d9fc2d6caa4566428203d629849f6ac, type: 3}
       propertyPath: m_AnchorMax.x

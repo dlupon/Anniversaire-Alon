@@ -6,7 +6,7 @@ public class Movement : Anomaly
 {
     // -------~~~~~~~~~~================# // Movement
     [SerializeField] private Transform _target = null;
-    [SerializeField] private Transform _pointContainer;
+    [SerializeField] private Transform _pointContainer = null;
     private List<Transform> _points = new List<Transform>();
 
     Vector3 _baseScale;
@@ -26,6 +26,12 @@ public class Movement : Anomaly
         _baseScale = _target.localScale;
         _basePosition = _target.position;
         _baseRotation = _target.rotation;
+
+        if (_pointContainer == null)
+        {
+            _points.Add(transform.GetChild(0));
+            return;
+        }
 
         _pointContainer.GetComponentsInChildren(_points);
         if (_points.Count > 1 && _points.Contains(_pointContainer)) _points.Remove(_pointContainer);
