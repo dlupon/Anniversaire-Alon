@@ -12,8 +12,9 @@ public class MultiAnomaly : Anomaly
     [SerializeField] private List<Anomaly> _anomalies = new List<Anomaly>();
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         Type = _isCustomType ? _customType : $"{_type}";
     }
 

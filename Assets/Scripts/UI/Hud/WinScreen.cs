@@ -47,5 +47,6 @@ public class WinScreen : MonoBehaviour
     public void Exit()
     {
         SceneManager.LoadScene("Main");
+        EventBus.Reset();
     }
 }

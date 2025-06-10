@@ -11,8 +11,9 @@ public class Heart : Anomaly
     [SerializeField] private float _spawnDuration = 1f;
     protected Tween m_animator = new Tween();
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         Type = nameof(Heart);
 
         m_target = m_target == null ? transform : m_target;

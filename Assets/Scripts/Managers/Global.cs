@@ -1,5 +1,9 @@
 using System;
 using System.Collections.Generic;
+using static UnityEngine.Rendering.DebugUI.Table;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnBocal.TweeningSystem;
 public static class EventBus
 {
     // -------~~~~~~~~~~================# // Initialization
@@ -52,10 +56,14 @@ public static class EventBus
         AnomalyFixed = null;
         AnomalyNotFounded = null;
         TooManyAnomalies = null;
+        GetAnomalyHandeler = null;
         Warn = null;
         TimeUpdated = null;
+        TimeNewHour = null;
         TimeEnded = null;
         StopTime = null;
+
+        Tween.KillAndClear();
     }
 }
 

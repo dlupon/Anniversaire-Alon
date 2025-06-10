@@ -17,8 +17,9 @@ public class NenouilleJumpScare : Anomaly
     private Vector3 _basePosition;
     private Quaternion _baseRotation;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         Type = $"Nenouille ?";
 
         _target = _target == null ? transform : _target;

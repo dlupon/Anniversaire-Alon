@@ -9,8 +9,9 @@ public class Replacement : Anomaly
     private List<Transform> _otherObjects = new List<Transform>();
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         Type = $"{AnomalyType.Replacement}";
 
         _target = _target == null ? GetComponent<MeshRenderer>() : _target;

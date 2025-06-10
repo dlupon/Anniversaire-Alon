@@ -17,8 +17,9 @@ public class MaterialReplacement : Anomaly
     [SerializeField] private EaseType _ease = EaseType.Flat;
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         Type = $"{AnomalyType.Replacement}";
 
         _target = _target == null ? GetComponent<MeshRenderer>() : _target;

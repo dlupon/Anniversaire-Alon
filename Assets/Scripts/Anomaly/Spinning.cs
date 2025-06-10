@@ -16,8 +16,9 @@ public class Spinning : Anomaly
     private Tween _animator = new Tween();
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         Type = $"{AnomalyType.Movement}";
 
         _target = _target == null ? transform : _target;

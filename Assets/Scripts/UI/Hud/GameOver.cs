@@ -66,7 +66,7 @@ public class GameOver : MonoBehaviour
         if (lAnomalyCount <= 0) return;
 
 
-        string[] lAnomaliesType = Enum.GetNames(typeof(Anomaly));
+        string[] lAnomaliesType = Enum.GetNames(typeof(AnomalyType));
         string lType;
 
         for (int lAnomalyIndex = 0; lAnomalyIndex < lAnomalyCount; lAnomalyIndex++)
@@ -83,6 +83,7 @@ public class GameOver : MonoBehaviour
 
     public void Exit()
     {
+        // EventBus.Reset();
         SceneManager.LoadScene("Main");
     }
 }

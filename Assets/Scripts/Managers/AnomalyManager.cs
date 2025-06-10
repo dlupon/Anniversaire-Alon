@@ -60,9 +60,13 @@ public class AnomalyManager : MonoBehaviour
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Room
-    private void SetRooms(List<Room> pRooms) => _rooms = pRooms.ToList();
+    private void SetRooms(List<Room> pRooms)
+    {
+        _rooms = pRooms.ToList();
+        Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Init Room");
+    }
 
-    private void UpdateRoom(Room pNewRoom)
+        private void UpdateRoom(Room pNewRoom)
     {
         _currentRoom = pNewRoom;
         EventBus.GetAnomalyHandeler?.Invoke(_currentRoom.AnomalyHandeler);
@@ -81,6 +85,7 @@ public class AnomalyManager : MonoBehaviour
     {
         Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Stop Looping");
 
+        _isActive = false;
         StopCoroutine(_coroutine);
         _coroutine = null;
     }

@@ -37,10 +37,14 @@ public class RoomManager : MonoBehaviour
         _rooms.Sort((Room pA, Room pB) => pA.transform.GetSiblingIndex().CompareTo(pB.transform.GetSiblingIndex()));
         EventBus.RoomListInit?.Invoke(_rooms);
 
+        Debug.Log($"{transform.childCount}   ->   {_rooms.Count}");
+
         // Do(HideRoom);
         ShowRoom(0);
 
         EventBus.Start?.Invoke();
+
+        GlobalVariables.LetterDiscovered++;
     }
 
     private void Do(Action<Room> pMethod)

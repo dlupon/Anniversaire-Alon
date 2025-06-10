@@ -21,6 +21,7 @@ namespace UnBocal.TweeningSystem
 
 		// -------~~~~~~~~~~================# // Tween
         private HashSet<Interpolation> _interpolators = new HashSet<Interpolation>();
+		[SerializeField] private List<object> all = new List<object>();
 
 		// -------~~~~~~~~~~================# // Coroutine
 		private Coroutine _coroutine;

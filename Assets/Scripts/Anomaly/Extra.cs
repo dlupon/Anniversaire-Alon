@@ -10,8 +10,9 @@ public class Extra : Anomaly
     private Tween _animator = new Tween();
     private Vector3 _baseScale;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         Type = $"{AnomalyType.Extra}";
 
         _target = _target == null ? transform : _target;

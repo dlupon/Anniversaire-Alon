@@ -14,8 +14,9 @@ public class Lighting : Anomaly
     private float _baseIntencity;
     private Color _baseColor;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         Type = $"{AnomalyType.Lighting}";
 
         _target = _target == null ? GetComponent<Light>() : _target;
