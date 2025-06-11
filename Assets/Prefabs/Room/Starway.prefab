@@ -138,7 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a394959eb1bfc8d4797a16d14c8b2444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ayo: 0
   Room: 
   _target: {fileID: 0}
   _duration: 1
@@ -251,7 +250,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a394959eb1bfc8d4797a16d14c8b2444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ayo: 0
   Room: 
   _target: {fileID: 0}
   _duration: 1
@@ -466,6 +464,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 23a0d2bbe37f6204e8c441c23034809a, type: 2}
+    - target: {fileID: -5245679459026459267, guid: db414ffa35bec8f49b3534753646e1c4, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 23a0d2bbe37f6204e8c441c23034809a, type: 2}
     - target: {fileID: -5117166909814561321, guid: db414ffa35bec8f49b3534753646e1c4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -554,7 +556,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65c98dc56f385f45a8d14d20b6cf288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ayo: 0
   Room: 
   _target: {fileID: 0}
 --- !u!1 &1080878429047344351 stripped
@@ -574,7 +575,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea304aaa59572a642bae9da88efebcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ayo: 0
   Room: 
   _target: {fileID: 0}
 --- !u!1 &1190802591415234126 stripped
@@ -594,7 +594,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea304aaa59572a642bae9da88efebcd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ayo: 0
   Room: 
   _target: {fileID: 0}
 --- !u!1 &2201990927792809688 stripped
@@ -614,7 +613,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ddbac7fe472e44c82fbad76e32d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ayo: 0
   Room: 
   _target: {fileID: 0}
   _pointContainer: {fileID: 1082300596893145066}
@@ -635,7 +633,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65c98dc56f385f45a8d14d20b6cf288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ayo: 0
   Room: 
   _target: {fileID: 0}
 --- !u!1 &3656650649984100680 stripped
@@ -655,7 +652,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ddbac7fe472e44c82fbad76e32d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ayo: 0
   Room: 
   _target: {fileID: 0}
   _pointContainer: {fileID: 1649130824409498360}
@@ -676,7 +672,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65c98dc56f385f45a8d14d20b6cf288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ayo: 0
   Room: 
   _target: {fileID: 0}
 --- !u!4 &4821347817904331080 stripped
@@ -701,7 +696,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ddbac7fe472e44c82fbad76e32d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ayo: 0
   Room: 
   _target: {fileID: 0}
   _pointContainer: {fileID: 8673715067019000849}
@@ -727,7 +721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a634a81d3ac7672499fbbc8c04d6ac76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ayo: 0
   Room: 
   _target: {fileID: 0}
   _materials:
@@ -751,7 +744,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3ddbac7fe472e44c82fbad76e32d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ayo: 0
   Room: 
   _target: {fileID: 0}
   _pointContainer: {fileID: 1852647331427498810}

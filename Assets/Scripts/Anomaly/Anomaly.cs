@@ -3,15 +3,11 @@ using UnityEngine;
 public class Anomaly : MonoBehaviour
 {
     public bool IsActive { private set; get; }
-    public float Ayo;
 
     public string Type { protected set; get; }
     [HideInInspector] public string Room;
 
-    protected virtual void Start()
-    {
-        Ayo = GlobalVariables.LetterDiscovered;
-    }
+    protected virtual void Start() {}
 
     public virtual void Trigger()
     {
@@ -19,9 +15,6 @@ public class Anomaly : MonoBehaviour
         Debug.Log($"<color=#fcba03>{nameof(Anomaly)}</color> :" +
             $" <color=#46e0e0>{Room} -> {Type} {name}</color> ->" +
             $" <color=#d17ffa>Triggered</color>");
-
-        Debug.Log(Ayo);
-        transform.parent = null;
     }
 
     public virtual void Fix()

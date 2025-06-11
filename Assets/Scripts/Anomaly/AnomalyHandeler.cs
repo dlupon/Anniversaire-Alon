@@ -20,17 +20,16 @@ public class AnomalyHandeler : MonoBehaviour
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Anomaly
     private void GetAnomalies()
     {
+        _anomalies.Clear();
         transform.GetComponentsInChildren(_anomalies);
         _anomalies.Sort(new RandomComparer());
-
-        foreach (Anomaly lAnomalyOrHeart in _anomalies)
-            lAnomalyOrHeart.Room = name;
         
         Anomaly lAnomaly;
 
         for (int lAnomalyIndex = _anomalies.Count - 1; lAnomalyIndex  >= 0; lAnomalyIndex--)
         {
             lAnomaly = _anomalies[lAnomalyIndex];
+            lAnomaly.Room = name;
 
             if (lAnomaly.Type != nameof(Heart)) continue;
 

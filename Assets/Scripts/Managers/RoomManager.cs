@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class RoomManager : MonoBehaviour
 {
@@ -32,14 +29,12 @@ public class RoomManager : MonoBehaviour
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Room
     private IEnumerator InitRooms()
     {
+        _rooms.Clear();
         yield return new WaitUntil(() => transform.childCount <= _rooms.Count);
 
         _rooms.Sort((Room pA, Room pB) => pA.transform.GetSiblingIndex().CompareTo(pB.transform.GetSiblingIndex()));
         EventBus.RoomListInit?.Invoke(_rooms);
 
-        Debug.Log($"{transform.childCount}   ->   {_rooms.Count}");
-
-        // Do(HideRoom);
         ShowRoom(0);
 
         EventBus.Start?.Invoke();
