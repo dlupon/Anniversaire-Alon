@@ -72,7 +72,7 @@ public class ReportSystem : MonoBehaviour
 
     private Button CreateButton(Button pButton, string pName)
     {
-        pButton.GetComponentInChildren<TextMeshProUGUI>().text = pButton.name = pName;
+        pButton.GetComponent<TextMeshProUGUI>().text = pButton.name = pName;
         pButton.onClick.RemoveAllListeners();
         pButton.onClick.AddListener(() => Report(pName));
 

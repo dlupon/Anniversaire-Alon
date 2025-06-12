@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b77c5407dc277943b591ade9e6b18c5, type: 3}
   m_Name: LensDistortion
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
@@ -84,34 +84,6 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   scale:
-    overrideState: 0
-    value: 1
---- !u!114 &-4969334907307601314
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 556797029e73b2347956b6579e77e05b, type: 3}
-  m_Name: DepthOfField
-  m_EditorClassIdentifier: 
-  active: 0
-  enabled:
-    overrideState: 1
-    value: 1
-  focusDistance:
-    overrideState: 1
-    value: 134.5
-  aperture:
-    overrideState: 1
-    value: 2.4
-  focalLength:
-    overrideState: 1
-    value: 43
-  kernelSize:
     overrideState: 0
     value: 1
 --- !u!114 &-1076499600668513112
@@ -161,8 +133,7 @@ MonoBehaviour:
   - {fileID: 3807728188145487766}
   - {fileID: 995386647919613721}
   - {fileID: 2479240822801779815}
-  - {fileID: 1847099798173622302}
-  - {fileID: -4969334907307601314}
+  - {fileID: 2145872556366221825}
 --- !u!114 &995386647919613721
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -210,7 +181,7 @@ MonoBehaviour:
   dirtIntensity:
     overrideState: 0
     value: 0
---- !u!114 &1847099798173622302
+--- !u!114 &2145872556366221825
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,10 +199,10 @@ MonoBehaviour:
     value: 1
   shutterAngle:
     overrideState: 1
-    value: 360
+    value: 270
   sampleCount:
-    overrideState: 1
-    value: 32
+    overrideState: 0
+    value: 10
 --- !u!114 &2479240822801779815
 MonoBehaviour:
   m_ObjectHideFlags: 3

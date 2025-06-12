@@ -5,7 +5,6 @@ using TMPro;
 using UnBocal.TweeningSystem;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
@@ -68,22 +67,24 @@ public class GameOver : MonoBehaviour
 
         string[] lAnomaliesType = Enum.GetNames(typeof(AnomalyType));
         string lType;
+        TextMeshProUGUI lAnomaly;
 
         for (int lAnomalyIndex = 0; lAnomalyIndex < lAnomalyCount; lAnomalyIndex++)
         {
             lType = lAnomaliesType.Contains(pAnomalies[lAnomalyIndex].Type) ? pAnomalies[lAnomalyIndex].Type : "???";
 
-            _anomalyTextFactory.text = $"{lType} in {pAnomalies[lAnomalyIndex].Room}";
-            _anomalies.Add(_anomalyTextFactory);
-
-            if (lAnomalyIndex >= lAnomalyCount - 1) break;
-            _anomalyTextFactory = Instantiate(_anomalyTextFactory, _anomalyContainer);
+            lAnomaly = Instantiate(_anomalyTextFactory, _anomalyContainer);
+            lAnomaly.text = $"{lType} in {pAnomalies[lAnomalyIndex].Room}";
+            _anomalies.Add(lAnomaly);
         }
     }
 
     public void Exit()
     {
-        // EventBus.Reset();
-        SceneManager.LoadScene("Main");
+        foreach (TextMeshProUGUI lAnomaly in _anomalies)
+            Destroy(lAnomaly.gameObject);
+        _anomalies.Clear();
+
+        EventBus.ToMain?.Invoke();
     }
 }

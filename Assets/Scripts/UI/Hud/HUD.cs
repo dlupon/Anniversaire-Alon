@@ -19,6 +19,7 @@ public class HUD : MonoBehaviour
 
     // -------~~~~~~~~~~================# // Animation
     [SerializeField] private CanvasGroup _transition;
+    private Tween _transitionAnimator = new Tween();
     private Tween _textAnimator = new Tween();
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
@@ -28,6 +29,7 @@ public class HUD : MonoBehaviour
         EventBus.RoomChanged += UpdateRoom;
         EventBus.CheckAnomalyDone += ShowDefaultPage;
         EventBus.TimeUpdated += UpdateTime;
+        EventBus.Start += OnStart;
     }
 
     private void OnDestroy()
@@ -36,14 +38,11 @@ public class HUD : MonoBehaviour
         EventBus.RoomChanged -= UpdateRoom;
         EventBus.CheckAnomalyDone -= ShowDefaultPage;
         EventBus.TimeUpdated -= UpdateTime;
+        EventBus.Start -= OnStart;
     }
 
     private void Start()
     {
-        Tween lAnimator = new Tween();
-        lAnimator.Interpolate<float>(_transition, (x) => _transition.alpha = x, 0f, 1f, 1f);
-        lAnimator.Start();
-
         if (_pageContainer.childCount > 0)
         {
             _defaultPage = _pageContainer.GetChild(0).name;
@@ -52,6 +51,13 @@ public class HUD : MonoBehaviour
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Change Room
+    private void OnStart()
+    {
+        Tween.KillAndClear(_transition);
+        _transitionAnimator.Interpolate<float>(_transition, (x) => _transition.alpha = x, 0f, 1f, 1f);
+        _transitionAnimator.Start();
+    }
+
     public void OnPrevious()
     {
         if (_roomIndexOffset == 0) EventBus.NeedCameraFade?.Invoke();

@@ -30,7 +30,6 @@ public class AnomalyManager : MonoBehaviour
     [SerializeField] private float _timeBeforeWarning = 5f;
     [SerializeField] private float _timeBeforeDeath = 5f;
     private List<Anomaly> _anomalies = new List<Anomaly>();
-    private bool _warned = false;
     private Coroutine _coroutine;
 
     // -------~~~~~~~~~~================# // Anomalies
@@ -48,6 +47,7 @@ public class AnomalyManager : MonoBehaviour
         EventBus.RoomChanged += UpdateRoom;
         EventBus.ReportAnomaly += TryFix;
         EventBus.TimeEnded += StopLooping;
+        EventBus.ToMain += ClearAllAnomalies;
     }
 
     private void OnDestroy()
@@ -57,13 +57,30 @@ public class AnomalyManager : MonoBehaviour
         EventBus.RoomChanged -= UpdateRoom;
         EventBus.ReportAnomaly -= TryFix;
         EventBus.TimeEnded -= StopLooping;
+        EventBus.ToMain -= ClearAllAnomalies;
+    }
+
+    // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Start Exit
+    private void OnStart()
+    {
+        _currentHeartCooldown = -1;
+    }
+
+    private void ClearAllAnomalies()
+    {
+        foreach (Room pRoom in _activeRooms)
+            pRoom.AnomalyHandeler.Fix();
+
+        _anomalies.Clear();
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Room
     private void SetRooms(List<Room> pRooms)
     {
         _rooms = pRooms.ToList();
-        Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Init Room");
+        _disabledRooms.Clear();
+        _activeRooms.Clear();
+        Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Init Room -> {_rooms.Count}");
     }
 
         private void UpdateRoom(Room pNewRoom)
@@ -109,6 +126,8 @@ public class AnomalyManager : MonoBehaviour
     // -------~~~~~~~~~~================# // Triggering / Rooms
     private void TryTriggerAnomaly()
     {
+        Debug.Log(_rooms.Count);
+
         int lRandomIndex = Random.Range(0, _rooms.Count);
         int lRoomIndex = 0;
         Room lRoom;
@@ -203,16 +222,29 @@ public class AnomalyManager : MonoBehaviour
             Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Wait For Checking Game Over / Warning");
             yield return new WaitForSeconds(_timeBeforeWarning);
             yield return new WaitUntil(() => !_isSearching);
-            if (_tooManyAnomalies) Warn();
+            TryWarn();
             yield return new WaitForSeconds(_timeBeforeDeath);
             yield return new WaitUntil(() => !_isSearching);
-            if (_tooManyAnomalies) CheckGameOver();
+            CheckGameOver();
         }
+    }
+
+    private void TryWarn()
+    {
+        if (!_tooManyAnomalies) return;
+        Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Warning");
+        Warn();
+    }
+
+    private void Warn()
+    {
+        EventBus.TooManyAnomalies?.Invoke();
+        EventBus.Warn?.Invoke("/!\\ WARNING THERE IS TOO MANY ANOMALIES /!\\ ", 5, Color.red);
     }
 
     private void CheckGameOver()
     {
-        if (!_warned || !_tooManyAnomalies) return;
+        if (!_tooManyAnomalies) return;
         Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Game Over");
         GameOver();
     }
@@ -228,20 +260,5 @@ public class AnomalyManager : MonoBehaviour
         EventBus.StopTime?.Invoke();
         EventBus.GameOverGetAnomalies?.Invoke(lAnomalies);
         EventBus.GameOver?.Invoke();
-    }
-
-    private void TryWarn()
-    {
-        if (_warned || !_tooManyAnomalies) return;
-        Debug.Log($"<color=#ff0000>{nameof(AnomalyManager)}</color> : Warning");
-        Warn();
-    }
-
-    private void Warn()
-    {
-        _warned = true;
-
-        EventBus.TooManyAnomalies?.Invoke();
-        EventBus.Warn?.Invoke("/!\\ WARNING THERE IS TOO MANY ANOMALIES /!\\ ", 5, Color.red);
     }
 }

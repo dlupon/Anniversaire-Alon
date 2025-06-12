@@ -62,19 +62,27 @@ public class AnomalyHandeler : MonoBehaviour
         return ActiveAnomaly;
     }
 
+    public void Fix()
+    {
+        if (ActiveAnomaly == null) return;
+        
+        ActiveAnomaly.Fix();
+
+        if (ActiveAnomaly.Type != nameof(Heart)) _anomalies.Add(ActiveAnomaly);
+        else _heart.Add(ActiveAnomaly);
+
+        ActiveAnomaly = null;
+    }
+
     public Anomaly Fix(string pAnomaly)
     {
         if (ActiveAnomaly == null || ActiveAnomaly.Type != pAnomaly) return null;
 
-        Anomaly lFixedAnomaly = ActiveAnomaly;
-        ActiveAnomaly = null;
+        Anomaly lActiveAnomaly = ActiveAnomaly;
 
-        lFixedAnomaly.Fix();
+        Fix();
 
-        if (lFixedAnomaly.Type != nameof(Heart)) _anomalies.Add(lFixedAnomaly);
-        else _heart.Add(lFixedAnomaly);
-
-        return lFixedAnomaly;
+        return lActiveAnomaly;
     }
 }
 

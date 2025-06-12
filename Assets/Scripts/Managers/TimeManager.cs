@@ -18,19 +18,19 @@ public class TimeManager : MonoBehaviour
     private void Awake()
     {
         EventBus.StopTime += StopTime;
+        EventBus.Start += StartTime;
     }
 
     private void OnDestroy()
     {
         EventBus.StopTime -= StopTime;
+        EventBus.Start -= StartTime;
     }
 
     private void Start()
     {
         _hourLength = _maxTimeInMinutes * MAX_MINUTE / ((float)_hourCount);
         _minuteLength = _hourLength / MAX_MINUTE;
-
-        StartTime();
     }
 
     private void StartTime() => _coroutine = StartCoroutine(LoopTime());

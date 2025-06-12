@@ -1,7 +1,6 @@
 using TMPro;
 using UnBocal.TweeningSystem;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Title : MonoBehaviour
@@ -10,19 +9,36 @@ public class Title : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _version;
 
     [SerializeField] private Image _transition;
+    private Tween _animator = new Tween();
+
+    private void Awake()
+    {
+        EventBus.ToMain += ToMain;
+    }
+
+    private void OnDestroy()
+    {
+        EventBus.ToMain -= ToMain;
+    }
 
     private void Start()
     {
         _version.text = _version.text.Replace("{v}", Application.version);
-        _transition.gameObject.SetActive(false);
     }
 
-    public void LoadGame()
+    public void ToGame()
     {
         _transition.gameObject.SetActive(true);
-        Tween lAnimator = new Tween();
+        
+        Tween.KillAndClear(_transition);
+        _animator.Color(_transition, new Color(0, 0, 0, 0), Color.black, 1.5f).OnFinished += () => EventBus.Start?.Invoke();
+        _animator.Start();
+    }
 
-        lAnimator.Color(_transition, new Color(0, 0, 0, 0), Color.black, 1.5f).OnFinished += () => SceneManager.LoadScene(_sceneName);
-        lAnimator.Start();
+    public void ToMain()
+    {
+        Tween.KillAndClear(_transition);
+        _animator.Color(_transition, Color.black, new Color(0, 0, 0, 0), .1f).OnFinished += () => _transition.gameObject.SetActive(false);
+        _animator.Start();
     }
 }

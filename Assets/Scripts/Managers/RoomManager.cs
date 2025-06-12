@@ -16,32 +16,31 @@ public class RoomManager : MonoBehaviour
     {
         EventBus.RoomInit += _rooms.Add;
         EventBus.NeedChangeRoom += ShowRoomIndexOffset;
-
-        StartCoroutine(InitRooms());
+        EventBus.Start += OnStart;
     }
 
     private void OnDestroy()
     {
         EventBus.RoomInit -= _rooms.Add;
         EventBus.NeedChangeRoom -= ShowRoomIndexOffset;
+        EventBus.Start -= OnStart;
+    }
+
+    private void Start()
+    {
+        transform.GetComponentsInChildren(_rooms);
+    }
+
+    // ----------------~~~~~~~~~~~~~~~~~~~==========================# // StartGame
+    private void OnStart()
+    {
+        EventBus.RoomListInit?.Invoke(_rooms);
+
+        Do(HideRoom);
+        ShowRoom(0);
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Room
-    private IEnumerator InitRooms()
-    {
-        _rooms.Clear();
-        yield return new WaitUntil(() => transform.childCount <= _rooms.Count);
-
-        _rooms.Sort((Room pA, Room pB) => pA.transform.GetSiblingIndex().CompareTo(pB.transform.GetSiblingIndex()));
-        EventBus.RoomListInit?.Invoke(_rooms);
-
-        ShowRoom(0);
-
-        EventBus.Start?.Invoke();
-
-        GlobalVariables.LetterDiscovered++;
-    }
-
     private void Do(Action<Room> pMethod)
     {
         for (int pIndex = _rooms.Count - 1; pIndex >= 0; pIndex--)

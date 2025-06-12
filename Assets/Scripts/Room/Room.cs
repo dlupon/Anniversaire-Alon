@@ -8,14 +8,6 @@ public class Room : MonoBehaviour
     [SerializeField] private AnomalyHandeler _anomalyHandeler;
     public AnomalyHandeler AnomalyHandeler => _anomalyHandeler;
 
-    // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Unity
-    private void Start()
-    {
-        Hide();
-
-        EventBus.RoomInit?.Invoke(this);
-    }
-
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Camera
     private void SetCameraRender(RenderTexture pTexture)
     {
