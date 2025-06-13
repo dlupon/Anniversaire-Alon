@@ -15,6 +15,7 @@ public static class EventBus
     public static Action GameOver;
     public static Action<List<Anomaly>> GameOverGetAnomalies;
     public static Action ToMain;
+    public static Action ToGame;
 
     // -------~~~~~~~~~~================# // Room
     public static Action<int> NeedChangeRoom;

@@ -51,9 +51,9 @@ public class ReportSystem : MonoBehaviour
         bool pEnable = lCurrentAnomaly != null && !Enum.GetNames(typeof(AnomalyType)).Contains(lCurrentAnomaly.Type) ?
             lCurrentAnomaly.Type != "None" : false;
 
-        if (pEnable) _additionnalButton = CreateButton(_additionnalButton, lCurrentAnomaly.Type);
-
         _additionnalButton?.gameObject.SetActive(pEnable);
+
+        if (pEnable) _additionnalButton = CreateButton(_additionnalButton, lCurrentAnomaly.Type);
     }
 
     // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Buttons

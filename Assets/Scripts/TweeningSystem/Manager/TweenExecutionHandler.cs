@@ -115,6 +115,7 @@ namespace UnBocal.TweeningSystem
             {
 				lCurrentInterpolator = lInterpolations[lCurrentInterpolatorIndex];
                 lCurrentInterpolator.Update?.Invoke();
+
 				if (!lCurrentInterpolator.IsFinished) continue;
 				RemoveInterpolator(lCurrentInterpolator);
             }

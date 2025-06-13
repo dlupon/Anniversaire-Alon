@@ -67,6 +67,8 @@ namespace UnBocal.TweeningSystem.Interpolations
             UnScaleStart();
         }
 
+        public void Apply() => InterpolationMethod?.Invoke(0);
+
         // ----------------~~~~~~~~~~~~~~~~~~~==========================# // Interpolation
         public Interpolation SetTimeScaleDependent(bool pTimeScaleDependent) { TimeScaleDependent = pTimeScaleDependent; return this; }
 

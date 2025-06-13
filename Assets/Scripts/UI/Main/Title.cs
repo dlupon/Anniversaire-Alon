@@ -31,7 +31,7 @@ public class Title : MonoBehaviour
         _transition.gameObject.SetActive(true);
         
         Tween.KillAndClear(_transition);
-        _animator.Color(_transition, new Color(0, 0, 0, 0), Color.black, 1.5f).OnFinished += () => EventBus.Start?.Invoke();
+        _animator.Color(_transition, new Color(0, 0, 0, 0), Color.black, 1.5f).OnFinished += () => EventBus.ToGame?.Invoke();
         _animator.Start();
     }
 

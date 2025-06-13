@@ -5,13 +5,13 @@ public class GameManager : MonoBehaviour
 {
     private void Awake()
     {
-        EventBus.Start += Show;
+        EventBus.ToGame += Show;
         EventBus.ToMain += Hide;
     }
 
     private void OnDestroy()
     {
-        EventBus.Start -= Show;
+        EventBus.ToGame -= Show;
         EventBus.ToMain -= Hide;
     }
 
@@ -25,7 +25,11 @@ public class GameManager : MonoBehaviour
 
     private void Hide() => gameObject.SetActive(false);
 
-    private void Show() => gameObject.SetActive(true);
+    private void Show()
+    {
+        gameObject.SetActive(true);
+        EventBus.Start?.Invoke();
+    }
 
     private IEnumerator HideAfterInit()
     {

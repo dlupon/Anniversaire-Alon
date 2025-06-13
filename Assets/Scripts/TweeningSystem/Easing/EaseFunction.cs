@@ -191,7 +191,54 @@ namespace UnBocal.TweeningSystem
             };
         }
 
+        public static Func<float, float> GetJumpFunction(EaseType pEaseType = EaseType.Flat)
+        {
+            return pEaseType switch
+            {
+                EaseType.Flat => (x) => SmoothUpDown(x),
+
+                EaseType.InFlat => (x) => SmoothUpDown(Flat(x)),
+                EaseType.InSin => (x) => SmoothUpDown(InSin(x)),
+                EaseType.InCubic => (x) => SmoothUpDown(InCubic(x)),
+                EaseType.InQuad => (x) => SmoothUpDown(InQuad(x)),
+                EaseType.InQuart => (x) => SmoothUpDown(InQuart(x)),
+                EaseType.InQuint => (x) => SmoothUpDown(InQuint(x)),
+                EaseType.InCirc => (x) => SmoothUpDown(InCirc(x)),
+                EaseType.InElastic => (x) => SmoothUpDown(InElastic(x)),
+                EaseType.InBack => (x) => SmoothUpDown(InBack(x)),
+                EaseType.InBounce => (x) => SmoothUpDown(InBounce(x)),
+                EaseType.InExpo => (x) => SmoothUpDown(InExpo(x)),
+
+                EaseType.OutFlat => (x) => SmoothUpDown(Flat(x)),
+                EaseType.OutSin => (x) => SmoothUpDown(OutSin(x)),
+                EaseType.OutCubic => (x) => SmoothUpDown(OutCubic(x)),
+                EaseType.OutQuad => (x) => SmoothUpDown(OutQuad(x)),
+                EaseType.OutQuart => (x) => SmoothUpDown(OutQuart(x)),
+                EaseType.OutQuint => (x) => SmoothUpDown(OutQuint(x)),
+                EaseType.OutCirc => (x) => SmoothUpDown(OutCirc(x)),
+                EaseType.OutElastic => (x) => SmoothUpDown(OutElastic(x)),
+                EaseType.OutBack => (x) => SmoothUpDown(OutBack(x)),
+                EaseType.OutBounce => (x) => SmoothUpDown(OutBounce(x)),
+                EaseType.OutExpo => (x) => SmoothUpDown(OutExpo(x)),
+
+                EaseType.InOutFlat => (x) => SmoothUpDown(x),
+                EaseType.InOutSin => (x) => SmoothUpDown(InOutSin(x)),
+                EaseType.InOutCubic => (x) => SmoothUpDown(InOutCubic(x)),
+                EaseType.InOutQuad => (x) => SmoothUpDown(InOutQuad(x)),
+                EaseType.InOutQuart => (x) => SmoothUpDown(InOutQuart(x)),
+                EaseType.InOutQuint => (x) => SmoothUpDown(InOutQuint(x)),
+                EaseType.InOutCirc => (x) => SmoothUpDown(InOutCirc(x)),
+                EaseType.InOutElastic => (x) => SmoothUpDown(InOutElastic(x)),
+                EaseType.InOutBack => (x) => SmoothUpDown(InOutBack(x)),
+                EaseType.InOutBounce => (x) => SmoothUpDown(InOutBounce(x)),
+                EaseType.InOutExpo => (x) => SmoothUpDown(InOutExpo(x)),
+                _ => Flat,
+            };
+        }
+
         public static float UpDown(float pRatio) => -2 * Mathf.Abs(pRatio - .5f) + 1;
+
+        public static float SmoothUpDown(float pRatio) => Mathf.Sin(pRatio * Mathf.PI);
 
         public static float Flat(float pRatio) => pRatio;
 
@@ -395,6 +442,5 @@ namespace UnBocal.TweeningSystem
             return pX < 0.5f ? (1 - OutBounce(1 - 2 * pX)) / 2 : (1 + OutBounce(2 * pX - 1)) / 2;
         }
         #endregion
-
     }
 }
